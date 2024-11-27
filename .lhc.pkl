@@ -142,7 +142,7 @@ local mac = (base) {
     }
 
     distribution = new Sparkle {
-        minimumSystemVersion = "12.0"
+        minimumSystemVersion = "13.0"
         phasedRolloutInterval = 86400
 
         announceForum =
