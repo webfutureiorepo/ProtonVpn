@@ -1,7 +1,7 @@
 //
-//  Created on 14/12/2023.
+//  Created on 25/10/2024.
 //
-//  Copyright (c) 2023 Proton AG
+//  Copyright (c) 2024 Proton AG
 //
 //  ProtonVPN is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -16,14 +16,13 @@
 //  You should have received a copy of the GNU General Public License
 //  along with ProtonVPN.  If not, see <https://www.gnu.org/licenses/>.
 
-import Foundation
+import SwiftUI
 
-public enum Constants {
-    public static let readableContentWidth: CGFloat = 672
+public protocol ViewDimensionPreferenceKey: PreferenceKey { }
 
-    public static let maxHomeContentWidth: CGFloat = 736
-
-    /// Number of free countries beyond the ones depicted by the flags in the
-    /// "Auto-selected from" disclaimer in the home connection card.
-    public static let additionalFreeCountryCount: Int = 2
+extension ViewDimensionPreferenceKey {
+    public static var defaultValue: CGFloat { .zero }
+    public static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = nextValue()
+    }
 }
