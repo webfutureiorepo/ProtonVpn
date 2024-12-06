@@ -1,5 +1,5 @@
 //
-//  Created on 21/06/2024.
+//  Created on 03/12/2024.
 //
 //  Copyright (c) 2024 Proton AG
 //
@@ -16,18 +16,16 @@
 //  You should have received a copy of the GNU General Public License
 //  along with ProtonVPN.  If not, see <https://www.gnu.org/licenses/>.
 
-import Foundation
-import Dependencies
 import CertificateAuthentication
 import CommonNetworking
-import VPNShared
+import Dependencies
 
-extension SessionService: DependencyKey {
-    public static let liveValue: SessionService = {
+extension CertificateAuthentication.SessionService: DependencyKey {
+    public static let liveValue: CertificateAuthentication.SessionService = {
         @Dependency(\.networking) var networking
         @Dependency(\.appInfo) var appInfo
 
-        return SessionService(
+        return CertificateAuthentication.SessionService(
             selector: {
                 let clientId = appInfo.clientId(forContext: .wireGuardExtension)
                 let forkRequest = ForkSessionRequest(useCase: .getSelector(clientId: clientId, independent: false))

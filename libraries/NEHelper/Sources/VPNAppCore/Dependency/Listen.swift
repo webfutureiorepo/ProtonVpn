@@ -1,7 +1,7 @@
 //
-//  Created on 07/07/2023.
+//  Created on 03/12/2024.
 //
-//  Copyright (c) 2023 Proton AG
+//  Copyright (c) 2024 Proton AG
 //
 //  ProtonVPN is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -19,14 +19,16 @@
 import Dependencies
 
 extension DependencyValues {
-    /// Atm it's neither async nor throws, but the plan is to return only after connection is closed and also to throw exceptions
+    /// ATM it's neither async nor throws, but the plan is to return only after connection is made and also to throw exceptions
     /// so user can be presented with an error from UI, and not from the depths of VPN connection related code.
-    public var disconnectVPN: @Sendable () async throws -> Void {
-        get { self[DisconnectVPNKey.self] }
-        set { self[DisconnectVPNKey.self] = newValue }
+    public var listenVPNStatus: @Sendable () -> AsyncStream<VPNConnectionStatus> {
+        get { self[ListenVPNStatusKey.self] }
+        set { self[ListenVPNStatusKey.self] = newValue }
     }
 }
 
-public enum DisconnectVPNKey: TestDependencyKey {
-    public static let testValue: @Sendable () async throws -> Void = { }
+public enum ListenVPNStatusKey: TestDependencyKey {
+    public static let testValue: @Sendable () -> AsyncStream<VPNConnectionStatus> = {
+        AsyncStream<VPNConnectionStatus> { $0.finish() }
+    }
 }
