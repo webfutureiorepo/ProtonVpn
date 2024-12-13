@@ -39,6 +39,8 @@ variables:
 default:
   image: "team-vpn-$BUILD_HOST_IDENTIFIER"
 
+{% if config.build.userProperties.isSliTestEnabled != "true" %}
+
 include:
   - component: gitlab.protontech.ch/proton/devops/cicd-components/kits/devsecops/generic@0.0.10
     inputs:
@@ -61,6 +63,7 @@ include:
       suffix: ":custom"
       expiration: "2h"
       cleanup: manual
+{% endif %}
 
 {%- if config.releaseChannel == "production" and config.build.ci.tagName -%}{# Jobs amended in publish template #}
   - project: 'agarroux/publish-github'
@@ -178,4 +181,6 @@ include:
 # ANNOUNCE STEP
 ##############
 # Runs jobs announcing new builds and/or pipeline failures.
+{% if config.build.userProperties.isSliTestEnabled != "true" %}
 {% include "gitlab-announce-jobs.yml" %}
+{% endif %}
