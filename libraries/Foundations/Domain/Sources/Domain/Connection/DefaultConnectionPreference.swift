@@ -1,5 +1,5 @@
 //
-//  Created on 19/11/2024.
+//  Created on 06/12/2024.
 //
 //  Copyright (c) 2024 Proton AG
 //
@@ -16,18 +16,15 @@
 //  You should have received a copy of the GNU General Public License
 //  along with ProtonVPN.  If not, see <https://www.gnu.org/licenses/>.
 
-import OrderedCollections
-import ComposableArchitecture
-import Domain
+import Foundation
 
-public extension PersistenceReaderKey where Self == PersistenceKeyDefault<InMemoryKey<OrderedSet<RecentConnection>>> {
-    static var recents: Self {
-        PersistenceKeyDefault(.inMemory("recents"), [])
-    }
-}
+public enum DefaultConnectionPreference: Equatable, Hashable, Codable {
+    /// Fastest normal (non-secure core) server
+    /// The reason for excluding secure core servers is that when allowing the user to specify their connection
+    /// preference, we filter out the "Fastest normal" connection spec, but leave the "Fastest Secure Core" option.
+    case fastest
+    case mostRecent
+    case recent(ConnectionSpec)
 
-public extension PersistenceReaderKey where Self == PersistenceKeyDefault<InMemoryKey<DefaultConnectionPreference>> {
-    static var defaultConnectionPreference: Self {
-        PersistenceKeyDefault(.inMemory("defaultConnectionPreference"), .fastest)
-    }
+    public static let staticPreferences: [Self] = [.fastest, .mostRecent]
 }
