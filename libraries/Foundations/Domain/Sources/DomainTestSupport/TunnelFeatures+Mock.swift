@@ -1,5 +1,5 @@
 //
-//  Created on 28/06/2024.
+//  Created on 19/12/2024.
 //
 //  Copyright (c) 2024 Proton AG
 //
@@ -17,15 +17,15 @@
 //  along with ProtonVPN.  If not, see <https://www.gnu.org/licenses/>.
 
 import Foundation
+import struct Domain.TunnelFeatures
 
-public struct ServerConnectionIntent: Equatable, Sendable {
-    public let server: Server
-    public let tunnelSettings: TunnelSettings
-    public let features: VPNConnectionFeatures
-
-    public init(server: Server, tunnelSettings: TunnelSettings, features: VPNConnectionFeatures) {
-        self.server = server
-        self.tunnelSettings = tunnelSettings
-        self.features = features.copyWithChanged(bouncing: server.endpoint.label)
-    }
+extension TunnelFeatures {
+#if !os(tvOS)
+    public static let mock = TunnelFeatures(
+        killSwitch: false,
+        excludeLocalNetworks: false
+    )
+#else
+    public static let mock = TunnelFeatures()
+#endif
 }

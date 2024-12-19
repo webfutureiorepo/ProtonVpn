@@ -1,5 +1,5 @@
 //
-//  Created on 28/06/2024.
+//  Created on 19/12/2024.
 //
 //  Copyright (c) 2024 Proton AG
 //
@@ -18,14 +18,12 @@
 
 import Foundation
 
-public struct ServerConnectionIntent: Equatable, Sendable {
-    public let server: Server
-    public let tunnelSettings: TunnelSettings
-    public let features: VPNConnectionFeatures
+public struct TunnelSettings: Equatable, Sendable {
+    public private(set) var transport: WireGuardTransport
+    public private(set) var tunnelFeatures: TunnelFeatures
 
-    public init(server: Server, tunnelSettings: TunnelSettings, features: VPNConnectionFeatures) {
-        self.server = server
-        self.tunnelSettings = tunnelSettings
-        self.features = features.copyWithChanged(bouncing: server.endpoint.label)
+    public init(transport: WireGuardTransport, tunnelFeatures: TunnelFeatures) {
+        self.transport = transport
+        self.tunnelFeatures = tunnelFeatures
     }
 }
