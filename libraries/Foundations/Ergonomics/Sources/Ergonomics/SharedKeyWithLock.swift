@@ -1,5 +1,5 @@
 //
-//  Created on 2024-12-16.
+//  Created on 2024-12-30.
 //
 //  Copyright (c) 2024 Proton AG
 //
@@ -16,16 +16,10 @@
 //  You should have received a copy of the GNU General Public License
 //  along with ProtonVPN.  If not, see <https://www.gnu.org/licenses/>.
 
-import Foundation
+import Sharing
 
-public enum DomainConstants {
-    public enum AppGroups {
-        public static let main = "group.ch.protonmail.vpn"
-    }
-}
+infix operator |=|
 
-public extension UserDefaults {
-    static let domainUserDefaults: UserDefaults = {
-        .init(suiteName: DomainConstants.AppGroups.main)!
-    }()
+public func |=| <Value> (lhs: Shared<Value>, rhs: Value) {
+    lhs.withLock { $0 = rhs }
 }

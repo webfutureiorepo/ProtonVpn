@@ -1,7 +1,7 @@
 //
-//  Created on 2024-12-16.
+//  Created on 2025-01-02.
 //
-//  Copyright (c) 2024 Proton AG
+//  Copyright (c) 2025 Proton AG
 //
 //  ProtonVPN is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -16,16 +16,17 @@
 //  You should have received a copy of the GNU General Public License
 //  along with ProtonVPN.  If not, see <https://www.gnu.org/licenses/>.
 
-import Foundation
+#if canImport(UIKit)
 
-public enum DomainConstants {
-    public enum AppGroups {
-        public static let main = "group.ch.protonmail.vpn"
+import UIKit
+import SwiftUI
+
+public func withOptionalAnimation<Result>(_ animation: Animation? = .default, _ body: () throws -> Result) rethrows -> Result {
+    if UIAccessibility.isReduceMotionEnabled {
+        try body()
+    } else {
+        try withAnimation(animation, body)
     }
 }
 
-public extension UserDefaults {
-    static let domainUserDefaults: UserDefaults = {
-        .init(suiteName: DomainConstants.AppGroups.main)!
-    }()
-}
+#endif
