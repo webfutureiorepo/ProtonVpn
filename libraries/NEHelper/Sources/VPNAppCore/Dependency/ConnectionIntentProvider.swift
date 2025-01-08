@@ -1,7 +1,7 @@
 //
-//  Created on 19/12/2024.
+//  Created on 09/01/2025.
 //
-//  Copyright (c) 2024 Proton AG
+//  Copyright (c) 2025 Proton AG
 //
 //  ProtonVPN is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -16,22 +16,21 @@
 //  You should have received a copy of the GNU General Public License
 //  along with ProtonVPN.  If not, see <https://www.gnu.org/licenses/>.
 
-import Foundation
+import Dependencies
+import DependenciesMacros
+import Domain
 
-public struct TunnelFeatures: Equatable, Sendable, Codable {
+@DependencyClient
+public struct ConnectionIntentStorage: TestDependencyKey, Sendable {
+    public var getConnectionIntent: @Sendable () throws -> ServerConnectionIntent
+    public var set: @Sendable (_ connectionIntent: ServerConnectionIntent) throws -> Void
 
-#if !os(tvOS)
-    public let killSwitch: Bool
-    public let excludeLocalNetworks: Bool
+    public static let testValue = ConnectionIntentStorage()
+}
 
-    public init(killSwitch: Bool, excludeLocalNetworks: Bool) {
-        self.killSwitch = killSwitch
-        self.excludeLocalNetworks = excludeLocalNetworks
+extension DependencyValues {
+    public var connectionIntentStorage: ConnectionIntentStorage {
+        get { self[ConnectionIntentStorage.self] }
+        set { self[ConnectionIntentStorage.self] = newValue }
     }
-#else
-    // For tvOS, these properties do not exist
-    public init() {
-        // No properties to initialize on tvOS
-    }
-#endif
 }
