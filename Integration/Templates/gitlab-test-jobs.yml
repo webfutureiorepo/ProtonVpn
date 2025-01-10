@@ -49,6 +49,10 @@
 
 # Unit tests run automatically on every job, provided the upstream pipelines (e.g. builds) are run.
 test:{{ config.name }}:unit:
+  rules:
+    - if: $SLI_TEST == "true"
+      when: never
+    - when: on_success
   extends:
     - .test_job_template
   stage: test
@@ -59,6 +63,8 @@ test:{{ config.name }}:unit:
 # - Depend on the success of the build job, and make sure it's successful.
 # - Make sure that deploy jobs in multiple child pipelines don't collide.
 # - Even after all of this, if it still fails, retry the job once.
+{% if config.build.userProperties.isSliTestEnabled != "true" %}
+
 atlas:deploy:pipenv:
   variables:
       GIT_STRATEGY: fetch
@@ -104,7 +110,6 @@ atlas:deploy:pipenv:
           - TARGET: tests
             CONFIGURATION: Debug
             DESTINATION: Default
-
   rules:
 {% if config.build.ci.eventType == "merge_request_event" or config.build.ci.eventType == "schedule" %}
     - when: on_success
@@ -113,13 +118,17 @@ atlas:deploy:pipenv:
       allow_failure: true
 {% endif %}
 
+{% endif %}
+
 .ui_test_template:
   extends:
     - .test_job_template
   stage: test_ui
   needs:
     - !reference [.test_job_template, needs]
+{% if config.build.userProperties.isSliTestEnabled != "true" %}
     - job: 'atlas:deploy:pipenv' # Make sure env gets deployed before starting UI tests
+{% endif %}
 
 # Smoke UI tests run for all merge request events, including merged results.
 test:{{ config.name }}:ui:smoke:
@@ -129,7 +138,9 @@ test:{{ config.name }}:ui:smoke:
   extends:
     - .ui_test_template
   rules:
-{% if config.build.ci.eventType == "merge_request_event" %}
+{% if config.build.userProperties.isSliTestEnabled == "true" %}
+    - when: never
+{% elif config.build.ci.eventType == "merge_request_event" %}
     - when: on_success
 {% else %}
     - when: manual
@@ -143,10 +154,28 @@ test:{{ config.name }}:ui:all:
     TEST_SUITE: UI-All
   extends:
     - .ui_test_template
-  {% if config.build.ci.eventType == "schedule" %}
+  rules:
+  {% if config.build.userProperties.isSliTestEnabled == "true" %}
+    - when: never
+  {% elif config.build.ci.eventType == "schedule" %}
+    - when: on_success
+  {% else %}
+    - when: manual
+      allow_failure: true
+  {% endif %}
+
+# SLI Tests run automatically on schedules only.
+test:{{ config.name }}:sli:all:
+  stage: test_ui
+  variables:
+    TEST_SUITE: SLI-All
+  extends:
+    - .ui_test_template
+  {% if config.build.ci.eventType == "schedule" and config.build.userProperties.isSliTestEnabled == "true"%}
   when: on_success
   {% else %}
   when: manual
+  allow_failure: true
   {% endif %}
 
 {% endblock %}

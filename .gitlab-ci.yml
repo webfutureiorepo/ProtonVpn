@@ -51,12 +51,12 @@ include:
   # - component: gitlab.protontech.ch/proton/devops/cicd-components/community/git-lhc/describe (not in the catalog yet)
   - project: 'proton/devops/cicd-components/community/git-lhc'
     file: templates/describe.yml
-    ref: 0.8.0-alpha.10
+    ref: 0.9.0-alpha.22
     inputs:
       output_directory: apple-vpn-ci
       cmd_prefix: "mint run "
       templates: "$PIPELINE_TEMPLATE pages.docc fastlane slack-message.txt sparkle-item.xml issue-hashes.txt"
-      trains: "ios mac tv"
+      trains: $TRAINS
 
 ##
 ## ---- Job templates shamefully stolen from Integration/Templates/gitlab-pipeline.yml
@@ -215,8 +215,25 @@ trigger:branch:
       - artifact: "$DESCRIBE_DIR/$TRAIN/$PIPELINE_TEMPLATE"
         job: prepare
   rules:
+    - if: $SLI_TEST == "true"
+      when: never
     - if: $CI_COMMIT_TAG
       when: never
     - if: $I18N_SCHEDULES_FILTER == "commit-translations"
       when: never
     - when: on_success
+
+trigger:sli:branch:
+  extends:
+    - .trigger_template
+  parallel:
+    matrix:
+      - TRAIN: [ios]
+  trigger:
+    include:
+      - artifact: "$DESCRIBE_DIR/$TRAIN/$PIPELINE_TEMPLATE"
+        job: prepare
+  rules:
+    - if: $SLI_TEST == "true"
+      when: on_success
+    - when: never

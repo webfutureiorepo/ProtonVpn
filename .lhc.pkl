@@ -190,6 +190,7 @@ local ios = (base) {
 
         userProperties = (base.build.userProperties) {
             ["simulatorRuntime"] = "iOS 17.5"
+            ["isSliTestEnabled"] = read?("env:SLI_TEST") ?? ""
         }
     }
 

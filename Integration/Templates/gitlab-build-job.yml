@@ -56,8 +56,8 @@
  #}
 {% block build_rules %}
 {# We have to use the template here, because $CI_PIPELINE_SOURCE is always "parent_pipeline". #}
-{% if config.build.ci.eventType == "merge_request_event" %}
-{% if config.build.ci.refName == config.userProperties.releaseBranch %}
+{% if config.build.ci.eventType == "merge_request_event" or config.build.userProperties.isSliTestEnabled == "true"%}
+{% if config.build.ci.refName == config.userProperties.releaseBranch and config.build.userProperties.isSliTestEnabled != "true"%}
     - when: manual
 {% else %}
     - if: $TARGET == "app"
