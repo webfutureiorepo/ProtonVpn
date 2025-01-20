@@ -36,6 +36,7 @@ local base = new Train {
     build = new BuildSettings {
         ci = if (read?("env:CI") == "true") new PipelineProperties {
             userProperties = new Mapping {
+                ["readOnlyProvisioning"] = if (read?("env:MATCH_REPROVISION") == "true") "false" else "true"
                 ["pipelineHosts"] = "ci-vilnius-6" // for now, vilnius-1 is only used for macOS builds/tests.
             }
         } else null
