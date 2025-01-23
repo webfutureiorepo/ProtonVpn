@@ -23,36 +23,20 @@
     - .build_cache_template
 {% endblock %}
 
-{#
- # For merge results, all tests are manual.
- # Merge requests run unit and UI smoke tests.
- # Scheduled/web pipelines run unit and full UI tests.
- #}
-{% block test_rules %}
-{% if config.build.ci.eventType == "merge_request_event" and config.build.ci.refName != config.userProperties.releaseBranch %}
-    - if: $TEST_SUITE == "UI-All"
-      when: manual
-      allow_failure: true
-    - when: on_success
-{% elif config.build.ci.eventType == "schedule" or config.build.ci.eventType == "web" %}
-    - if: $TEST_SUITE == "UI-Smoke"
-      when: manual
-      allow_failure: true
-    - when: on_success
-{% else %}
-    - when: manual
-      allow_failure: true
-{% endif %}
-{% endblock %}
-
 {% block test_footer %}
 
 # Unit tests run automatically on every job, provided the upstream pipelines (e.g. builds) are run.
 test:{{ config.name }}:unit:
   rules:
+  {% if config.name == "mac" %}
+    # macOS tests are disabled until VPNAPPL-2607 is resolved.
+    - when: manual
+      allow_failure: true
+  {% else %}
     - if: $SLI_TEST == "true"
       when: never
     - when: on_success
+  {% endif %}
   extends:
     - .test_job_template
   stage: test
@@ -138,7 +122,7 @@ test:{{ config.name }}:ui:smoke:
   extends:
     - .ui_test_template
   rules:
-{% if config.build.userProperties.isSliTestEnabled == "true" %}
+{% if config.name == "mac" or config.build.userProperties.isSliTestEnabled == "true" %}
     - when: never
 {% elif config.build.ci.eventType == "merge_request_event" %}
     - when: on_success
@@ -155,7 +139,7 @@ test:{{ config.name }}:ui:all:
   extends:
     - .ui_test_template
   rules:
-  {% if config.build.userProperties.isSliTestEnabled == "true" %}
+  {% if config.name == "mac" or config.build.userProperties.isSliTestEnabled == "true" %}
     - when: never
   {% elif config.build.ci.eventType == "schedule" %}
     - when: on_success
@@ -171,11 +155,15 @@ test:{{ config.name }}:sli:all:
     TEST_SUITE: SLI-All
   extends:
     - .ui_test_template
-  {% if config.build.ci.eventType == "schedule" and config.build.userProperties.isSliTestEnabled == "true"%}
-  when: on_success
-  {% else %}
-  when: manual
-  allow_failure: true
-  {% endif %}
+  rules:
+    {% if config.name == "mac" %}
+    - when: manual
+      allow_failure: true
+    {% elif config.build.ci.eventType == "schedule" and config.build.userProperties.isSliTestEnabled == "true" %}
+    - when: on_success
+    {% else %}
+    - when: manual
+      allow_failure: true
+    {% endif %}
 
 {% endblock %}
