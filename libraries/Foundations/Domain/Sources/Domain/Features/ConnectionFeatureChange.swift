@@ -1,10 +1,7 @@
 //
-//  VpnFeatureChangeState.swift
-//  ProtonVPN - Created on 2020-10-21.
+//  Created on 22/01/2025.
 //
-//  Copyright (c) 2021 Proton Technologies AG
-//
-//  This file is part of ProtonVPN.
+//  Copyright (c) 2025 Proton AG
 //
 //  ProtonVPN is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -18,25 +15,22 @@
 //
 //  You should have received a copy of the GNU General Public License
 //  along with ProtonVPN.  If not, see <https://www.gnu.org/licenses/>.
-//
 
 import Foundation
 
-import Domain
-import Settings
-import VPNShared
+public enum ConnectionFeatureChange: Hashable, Sendable {
+    case tunnel(TunnelFeature)
+    case agent(AgentFeature)
 
-public typealias VpnFeatureChangeState = FeatureChangeAvailability
+    public enum AgentFeature: Hashable, Sendable {
+        case netShield(NetShieldType)
+        case vpnAccelerator(Bool)
+        case moderateNAT(NATType)
+    }
 
-extension VpnFeatureChangeState {
-    public init(state: VpnState, vpnProtocol: VpnProtocol?) {
-        switch state {
-        case .connected where vpnProtocol?.authenticationType == .certificate:
-            self = .withConnectionUpdate
-        case .connected, .connecting:
-            self = .withReconnect
-        default:
-            self = .immediate
-        }
+    public enum TunnelFeature: Hashable, Sendable {
+        case connectionProtocol(ConnectionProtocol)
+        case killSwitch(Bool)
+        case allowLAN(Bool)
     }
 }
