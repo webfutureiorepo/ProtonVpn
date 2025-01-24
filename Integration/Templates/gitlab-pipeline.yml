@@ -127,9 +127,9 @@ include:
     MINT_LINK_PATH: $MINT_PATH/bin
     MINT_CACHE_POLICY: pull-push
   cache: &mint_cache_cache
-    - key: mint-$CI_COMMIT_REF_SLUG
+    - key: mint-xcode-{{ config.build.userProperties.toolchainVersion }}-$CI_COMMIT_REF_SLUG
       fallback_keys:
-        - mint-{{ config.userProperties.releaseBranch }}
+        - mint-xcode-{{ config.build.userProperties.toolchainVersion }}-{{ config.userProperties.releaseBranch }}
       paths:
         - $MINT_PATH
       policy: $MINT_CACHE_POLICY

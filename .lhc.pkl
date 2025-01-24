@@ -36,14 +36,15 @@ local base = new Train {
     build = new BuildSettings {
         ci = if (read?("env:CI") == "true") new PipelineProperties {
             userProperties = new Mapping {
+                ["readOnlyProvisioning"] = if (read?("env:MATCH_REPROVISION") == "true") "false" else "true"
                 ["pipelineHosts"] = "ci-vilnius-6" // for now, vilnius-1 is only used for macOS builds/tests.
             }
         } else null
 
         productName = "ProtonVPN"
         userProperties = new Mapping {
-            ["platformVersion"] = "14.6.1"
-            ["toolchainVersion"] = "15.4"
+            ["platformVersion"] = "15.2"
+            ["toolchainVersion"] = "16.2"
             ["appConfigurations"] = "Release,Staging"
         }
     }

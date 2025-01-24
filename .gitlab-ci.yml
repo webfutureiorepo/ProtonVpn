@@ -24,7 +24,7 @@ variables:
   IMAGES: $IMAGES
 
 default:
-  image: "team-vpn-macos-14.6.1-xcode-15.4"
+  image: "team-vpn-macos-15.2-xcode-16.2"
 
 # Only start a pipeline if it's for a merge request, if the pipeline has been scheduled, if this is a merge result onto
 # the develop branch, or if this is a tag which begins with a recognized tag prefix like `mac` or `ios`.
@@ -72,9 +72,9 @@ include:
     MINT_LINK_PATH: $MINT_PATH/bin
     MINT_CACHE_POLICY: pull-push
   cache:
-    - key: mint-$CI_COMMIT_REF_SLUG
+    - key: mint-xcode-16.2-$CI_COMMIT_REF_SLUG
       fallback_keys:
-        - mint-$CI_DEFAULT_BRANCH
+        - mint-Xcode-16.2-$CI_DEFAULT_BRANCH
       paths:
         - $MINT_PATH
       policy: $MINT_CACHE_POLICY
