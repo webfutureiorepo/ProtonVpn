@@ -20,14 +20,20 @@ import ProtonCoreFeatureFlags
 import Domain
 
 extension FeatureFlagsRepository {
-    var isRedesigniOSEnabled: Bool {
+    @available(tvOS, unavailable)
+    @available(macOS, unavailable)
+    public var isRedesigniOSEnabled: Bool {
         if FeatureFlagsRepository.shared.isEnabled(VPNFeatureFlagType.redesigniOS), #available(iOS 17, *) {
             return true
         }
         return false
     }
 
-    var isConnectionFeatureEnabled: Bool {
+    public var isConnectionFeatureEnabled: Bool {
+        #if os(iOS)
         return isRedesigniOSEnabled && FeatureFlagsRepository.shared.isEnabled(VPNFeatureFlagType.useConnectionFeature)
+        #else
+        return false
+        #endif
     }
 }
