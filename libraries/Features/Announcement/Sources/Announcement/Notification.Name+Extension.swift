@@ -1,7 +1,7 @@
 //
-//  Created on 04.01.23.
+//  Created on 2025-01-31.
 //
-//  Copyright (c) 2023 Proton AG
+//  Copyright (c) 2025 Proton AG
 //
 //  ProtonVPN is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -17,22 +17,10 @@
 //  along with ProtonVPN.  If not, see <https://www.gnu.org/licenses/>.
 
 import Foundation
-import LegacyCommon
-import Ergonomics
 
-class SecureCoreWarningViewModel {
-    let sessionService: SessionService
-
-    init(sessionService: SessionService) {
-        self.sessionService = sessionService
-    }
-
-    func upgradeButtonPressed() async {
-        let url = await sessionService.getPlanSession(mode: .upgrade)
-        SafariService.openLink(url: url)
-    }
-
-    func learnMoreButtonPressed() {
-        SafariService().open(url: CoreAppConstants.ProtonVpnLinks.learnMore)
-    }
+public extension Notification.Name {
+    /// A user was displayed a announcement.
+    static let userWasDisplayedAnnouncement: Self = .init("UserWasDisplayedAnnouncement")
+    /// A user was redirected to a payment portal through a notification.
+    static let userEngagedWithAnnouncement: Self = .init("UserEngagedWithAnnouncement")
 }
