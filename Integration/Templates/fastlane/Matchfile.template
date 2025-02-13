@@ -2,7 +2,7 @@ team_name "{{ config.build.teamName }}"
 team_id "{{ config.build.teamId }}"
 platform "{{ config.build.platform|lowercase }}"
 git_branch "{{ config.build.match.branchName }}"
-readonly {{ config.build.ci.readOnlyProvisioning }}
+readonly {{ config.build.ci.userProperties.readOnlyProvisioning }}
 
 shallow_clone true
 clone_branch_directly true
