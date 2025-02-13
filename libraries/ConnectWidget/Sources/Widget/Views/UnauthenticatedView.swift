@@ -1,5 +1,5 @@
 //
-//  Created on 2025-01-15.
+//  Created on 15/01/2025.
 //
 //  Copyright (c) 2025 Proton AG
 //
@@ -17,38 +17,30 @@
 //  along with ProtonVPN.  If not, see <https://www.gnu.org/licenses/>.
 
 import SwiftUI
-import WidgetKit
-import VPNAppCore
+import Strings
 
-import ComposableArchitecture
-
-/// TODO: Revamp this view [VPNAPPL-2591]
-public struct ConnectWidgetView : View {
+struct UnauthenticatedView: View {
 
     @Environment(\.widgetFamily) var widgetFamily
 
-    @SharedReader(.vpnConnection) public var vpnConnection: String
-
-    public var body: some View {
+    var body: some View {
         VStack {
-            switch widgetFamily {
-            case .systemLarge:
-                Image(.logoWithTitle)
-            default:
-                Image(.logoMarks)
-            }
-            Text(vpnConnection)
             Spacer()
-            if vpnConnection == "Connected" {
-                Button(intent: DisconnectFromVPNIntent()) {
-                    Text("Disconnect")
-                }
-            } else {
-                Button(intent: ConnectToVPNIntent()) {
-                    Text("Connect")
-                }
+            switch widgetFamily {
+            case .systemSmall:
+                Image(.logoMarks)
+            default:
+                Image(.logoWithTitle)
             }
-
+            Spacer()
+            Button (intent: LoginIntent()) {
+                Text(Localizable.logIn)
+            }
+            .buttonStyle(PrimaryButtonStyle())
         }
     }
+}
+
+#Preview {
+    UnauthenticatedView()
 }
