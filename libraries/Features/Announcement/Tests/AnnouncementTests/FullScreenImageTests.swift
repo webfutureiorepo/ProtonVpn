@@ -16,25 +16,29 @@
 //  You should have received a copy of the GNU General Public License
 //  along with ProtonVPN.  If not, see <https://www.gnu.org/licenses/>.
 
-import Foundation
+import XCTest
 @testable import Announcement
 
-public struct ImageCacheMock: ImageCacheProtocol {
-    public static var completionBlockParameterValue = true
-    public func containsImageForKey(forKey key: String) async -> Bool {
-        return ImageCacheMock.completionBlockParameterValue
-    }
-    
-    public func prefetchURLs(_ urls: [URL]) async {
+class FullScreenImageTests: XCTestCase {
+
+    override func setUp() {
+        super.setUp()
     }
 
-    public init() {}
-}
-
-public struct ImageCacheFactoryMock: ImageCacheFactoryProtocol {
-    public func makeImageCache() -> ImageCacheProtocol {
-        ImageCacheMock()
+    override func tearDown() {
+        super.tearDown()
     }
-    
-    public init() {}
+
+    func testSelectsFirstAvailableURL() {
+        let sources: [FullScreenImage.Source] = [.init(url: "first", type: "", width: nil, height: nil),
+                                                 .init(url: "second", type: "", width: nil, height: nil)]
+        let sut = FullScreenImage(source: sources, alternativeText: "")
+        XCTAssertEqual(sut.firstURL?.absoluteString, "first")
+    }
+
+    func testReturnsNilForNoSources() {
+        let sut = FullScreenImage(source: [], alternativeText: "")
+        XCTAssertEqual(sut.firstURL, nil)
+    }
+
 }
