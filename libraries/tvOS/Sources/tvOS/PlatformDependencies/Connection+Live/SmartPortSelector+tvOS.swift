@@ -1,5 +1,5 @@
 //
-//  Created on 09/01/2025.
+//  Created on 25/02/2025.
 //
 //  Copyright (c) 2025 Proton AG
 //
@@ -17,22 +17,18 @@
 //  along with ProtonVPN.  If not, see <https://www.gnu.org/licenses/>.
 
 import Dependencies
-import DependenciesMacros
 import Domain
+import Connection
 
-@DependencyClient
-public struct ConnectionIntentStorage: TestDependencyKey, Sendable {
-    public internal(set) var getConnectionIntent: @Sendable () throws -> ServerConnectionIntent
-    public internal(set) var set: @Sendable (_ connectionIntent: ServerConnectionIntent) throws -> Void
+extension SmartPortSelectorBridge: @retroactive DependencyKey {
+    public static let liveValue: SmartPortSelectorBridge = SmartPortSelectorBridge(
+        select: { endpoint, connectionProtocol in
+            let defaultTVOSProtocol: VpnProtocol = .wireGuard(.udp)
+            @Dependency(\.connectionConfiguration) var configuration
+            let defaultPorts = configuration.wireguardConfig.defaultPorts(for: .udp)
+            let ports = endpoint.overridePorts(using: defaultTVOSProtocol) ?? defaultPorts
 
-    public static let testValue = ConnectionIntentStorage()
-
-    public static let storageKey: String = "ServerConnectionIntent"
-}
-
-extension DependencyValues {
-    public var connectionIntentStorage: ConnectionIntentStorage {
-        get { self[ConnectionIntentStorage.self] }
-        set { self[ConnectionIntentStorage.self] = newValue }
-    }
+            return .init(chosenProtocol: defaultTVOSProtocol, ports: ports)
+        }
+    )
 }
