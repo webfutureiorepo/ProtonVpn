@@ -1,5 +1,5 @@
 //
-//  Created on 08/01/2025.
+//  Created on 25/02/2025.
 //
 //  Copyright (c) 2025 Proton AG
 //
@@ -16,20 +16,19 @@
 //  You should have received a copy of the GNU General Public License
 //  along with ProtonVPN.  If not, see <https://www.gnu.org/licenses/>.
 
-import Foundation
+import Dependencies
 import Domain
 import Connection
-import Dependencies
-import VPNAppCore
 
-extension VPNConnectionActual {
-    init(server: Server, intent: ServerConnectionIntent, connectedDate: Date?) {
-        self.init(
-            connectedDate: connectedDate,
-            vpnProtocol: .wireGuard(intent.tunnelSettings.transport),
-            natType: intent.features.natType,
-            safeMode: intent.features.safeMode,
-            server: server
-        )
-    }
+extension SmartPortSelectorBridge: @retroactive DependencyKey {
+    public static let liveValue: SmartPortSelectorBridge = SmartPortSelectorBridge(
+        select: { endpoint, connectionProtocol in
+            let defaultTVOSProtocol: VpnProtocol = .wireGuard(.udp)
+            @Dependency(\.connectionConfiguration) var configuration
+            let defaultPorts = configuration.wireguardConfig.defaultPorts(for: .udp)
+            let ports = endpoint.overridePorts(using: defaultTVOSProtocol) ?? defaultPorts
+
+            return .init(chosenProtocol: defaultTVOSProtocol, ports: ports)
+        }
+    )
 }

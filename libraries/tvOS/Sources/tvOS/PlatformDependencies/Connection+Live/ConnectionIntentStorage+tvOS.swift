@@ -1,5 +1,5 @@
 //
-//  Created on 08/01/2025.
+//  Created on 24/02/2025.
 //
 //  Copyright (c) 2025 Proton AG
 //
@@ -16,20 +16,29 @@
 //  You should have received a copy of the GNU General Public License
 //  along with ProtonVPN.  If not, see <https://www.gnu.org/licenses/>.
 
-import Foundation
-import Domain
 import Connection
 import Dependencies
+import Domain
+import Connection
 import VPNAppCore
+import NEHelper
 
-extension VPNConnectionActual {
-    init(server: Server, intent: ServerConnectionIntent, connectedDate: Date?) {
-        self.init(
-            connectedDate: connectedDate,
-            vpnProtocol: .wireGuard(intent.tunnelSettings.transport),
-            natType: intent.features.natType,
-            safeMode: intent.features.safeMode,
-            server: server
-        )
+extension ConnectionIntentStorage: DependencyKey {
+    public static let liveValue: ConnectionIntentStorage = .init(
+        getConnectionIntent: {
+            @Dependency(\.storage) var storage
+            guard let intent = try storage.getForUser(ServerConnectionIntent.self, forKey: Self.storageKey) else {
+                throw IntentStorageError.intentMissing
+            }
+            return intent
+        },
+        set: { newIntent in
+            @Dependency(\.storage) var storage
+            try storage.setForUser(newIntent, forKey: Self.storageKey)
+        }
+    )
+
+    enum IntentStorageError: Error {
+        case intentMissing
     }
 }

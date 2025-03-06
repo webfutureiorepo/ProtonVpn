@@ -1,5 +1,5 @@
 //
-//  Created on 08/01/2025.
+//  Created on 26/02/2025.
 //
 //  Copyright (c) 2025 Proton AG
 //
@@ -16,20 +16,21 @@
 //  You should have received a copy of the GNU General Public License
 //  along with ProtonVPN.  If not, see <https://www.gnu.org/licenses/>.
 
-import Foundation
 import Domain
-import Connection
-import Dependencies
-import VPNAppCore
+import DomainTestSupport
 
-extension VPNConnectionActual {
-    init(server: Server, intent: ServerConnectionIntent, connectedDate: Date?) {
-        self.init(
-            connectedDate: connectedDate,
-            vpnProtocol: .wireGuard(intent.tunnelSettings.transport),
-            natType: intent.features.natType,
-            safeMode: intent.features.safeMode,
-            server: server
+public extension ServerConnectionIntent {
+    static func mock(
+        withSpecLocation location: ConnectionSpec.Location = .fastest,
+        server: Server = .mock,
+        tunnelSettings: TunnelSettings = .mock,
+        features: VPNConnectionFeatures = .mock
+    ) -> ServerConnectionIntent {
+        return ServerConnectionIntent(
+            spec: .init(location: location, features: []),
+            server: server,
+            tunnelSettings: tunnelSettings,
+            features: features
         )
     }
 }
