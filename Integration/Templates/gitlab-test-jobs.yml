@@ -15,6 +15,7 @@
     DERIVED_DATA_CACHE_POLICY: pull
     MINT_CACHE_POLICY: pull
     TEST_SUITE: Unit-All
+    TEST_RUNNER_CI_PROJECT_DIR: $CI_PROJECT_DIR
 {% endblock %}
 
 {% block test_header %}
