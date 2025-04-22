@@ -120,7 +120,8 @@ prepare:
     - .mint_cache
   variables:
     GIT_DEPTH: 200
-    GIT_SUBMODULE_STRATEGY: none
+    GIT_SUBMODULE_DEPTH: 1
+    GIT_SUBMODULE_STRATEGY: normal
   stage: prepare
   tags:
     - vpn-apple-xs
@@ -135,6 +136,7 @@ prepare:
           Integration/Scripts/code_quality.sh # Lint code quality
           Integration/Scripts/lint_translations.sh # Lint string files
       fi
+    - if [ -n "$CI_COMMIT_TAG" ]; then ./Integration/Scripts/check_tag.sh; fi
     - !reference [.lhc_describe, script] # Generate child pipelines
     - | # Use template output to fetch workflow information, and update the repo (don't require success)
       if [ -n "$CI_MERGE_REQUEST_IID" ]; then
