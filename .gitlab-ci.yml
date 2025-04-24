@@ -143,12 +143,6 @@ prepare:
         Integration/Scripts/update_workflow_metadata.sh || true
       elif [ -n "$CI_COMMIT_TAG" ]; then
         Integration/Scripts/update_workflow_metadata.sh "$DESCRIBE_DIR/release/issue-hashes.txt" || true
-      else
-        Integration/Scripts/update_workflow_metadata.sh \
-            "$DESCRIBE_DIR/mac/issue-hashes.txt" \
-            "$DESCRIBE_DIR/ios/issue-hashes.txt" \
-            "$DESCRIBE_DIR/tv/issue-hashes.txt" \
-          || true
       fi
 
       # Don't fail if push doesn't work, there will be plenty of opportunities to update in a later pipeline

@@ -8,20 +8,18 @@
 {{ release.body }}
 {% endif %}
 ## Changes
-@TabNavigator {
-{% for category, changes in release.changes %}
-    @Tab("{{ category }}") {
-        | Commit | Summary |
-        |--------|---------|
-        {% for change in changes %}| `{{ change.commitHash|prefix:oidStringLength }}` | {% if change.scope %}{{ change.scope }}: {% endif %}{{ change.summary }} |
-        {% endfor %}
-    }
+{% for category, changes in release.changes +%}
+
+### {{ config.changelogTypeDisplayNames[category]|default:category }}
+{% for change in changes %}
+- `{{ change.commitHash|prefix:oidStringLength }}` {%+ if change.scope %}{{ change.scope }}: {%+ endif %}{{ change.summary }}{% if change.projectIds +%} ({% for projectId in change.projectIds %}[{{ projectId }}]({{ config.userProperties.jiraIssueBaseURL }}/{{ projectId }}){% if not forloop.last %}, {% endif %}{% endfor %}){% endif +%}
 {% endfor %}
-## Topics
+{% endfor %}
+
 {% if checklist_filenames %}
+## Topics
 ### Checklists
 {% for filename in checklistFilenames %}
 - <article:{{ filename }}>
 {% endfor %}
 {% endif %}
-}
