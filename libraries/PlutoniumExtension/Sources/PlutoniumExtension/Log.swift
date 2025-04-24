@@ -1,5 +1,5 @@
 //
-//  Created on 10/04/2025 by Shahin Katebi.
+//  Created on 24/04/2025 by Shahin Katebi.
 //
 //  Copyright (c) 2025 Proton AG
 //
@@ -16,13 +16,8 @@
 //  You should have received a copy of the GNU General Public License
 //  along with Proton VPN.  If not, see <https://www.gnu.org/licenses/>.
 
-import PlutoniumExtension
-import NetworkExtension
+import Foundation
+import Logging
+import PMLogger
 
-#if DEBUG
-final class TransparentProxyProvider: PlutoniumTransparentProxyProvider {
-    // we define the transparent proxy here as a subclass of PlutoniumTransparentProxyProvider
-}
-#else
-final class TransparentProxyProvider: NETransparentProxyProvider { }
-#endif
+package let log = Logging.Logger(label: "ProtonVPN.PlutoniumExtension.logger")
