@@ -58,15 +58,13 @@ struct UpsellCarousel: View {
 }
 
 extension View {
-    @ViewBuilder
     func withMarginsForIPad(margins: CGFloat) -> some View {
-        if #available(iOS 17.0, *) {
-            self
-                .contentMargins(.horizontal, margins, for: .scrollContent)
-                .scrollClipDisabled()
-        } else {
-            self
+        guard #available(iOS 17.0, *) else {
+            return self
         }
+        return self
+            .contentMargins(.horizontal, margins, for: .scrollContent)
+            .scrollClipDisabled()
     }
 }
 

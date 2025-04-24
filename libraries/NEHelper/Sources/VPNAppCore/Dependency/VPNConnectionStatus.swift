@@ -140,7 +140,7 @@ public enum VPNConnectionStatusPublisherKey: TestDependencyKey {
 
 // MARK: - Mock for previews
 
-#if DEBUG || targetEnvironment(simulator)
+#if DEBUG
 extension CLLocationCoordinate2D {
     public static func mockPoland() -> Self {
         .init(latitude: 52.229675, longitude: 21.012231)
