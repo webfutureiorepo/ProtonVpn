@@ -25,6 +25,7 @@ import CoreLocation
 import Ergonomics
 import SVGView
 
+@available(iOS 17.0, *)
 @Reducer
 public struct HomeMapFeature {
 

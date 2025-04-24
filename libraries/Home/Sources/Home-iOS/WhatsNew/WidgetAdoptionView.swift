@@ -23,6 +23,7 @@ import Lottie
 import SharedViews
 import Strings
 
+@available(iOS 17, *)
 struct WidgetAdoptionView: View {
 
     let primaryAction: () -> Void
@@ -129,6 +130,7 @@ struct WidgetAdoptionView: View {
 
 // MARK: - Preview
 
+@available(iOS 17.0, *)
 #Preview {
     Text("Preview Background").sheet(isPresented: .constant(true)) {
         WidgetAdoptionView(primaryAction: {})

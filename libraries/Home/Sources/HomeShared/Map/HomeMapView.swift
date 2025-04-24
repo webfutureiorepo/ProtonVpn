@@ -23,6 +23,7 @@ import Ergonomics
 import Domain
 import CoreLocation
 
+@available(iOS 17.0, *)
 public struct HomeMapView: View {
     let store: StoreOf<HomeMapFeature>
 
@@ -40,18 +41,16 @@ public struct HomeMapView: View {
     }
 
     public var body: some View {
-        WithPerceptionTracking {
-            ZStack {
-                SVGView.map
-                MapPin(mode: .constant(store.pinMode))
-                    .scaleEffect(1 / mapScale()) // pin scales together with the map, so we need to counter it to preserve the original size
-                    .offset(store.pinOffset)
-                    .opacity(store.shouldShowPin ? 1 : 0)
-            }
-            .frame(width: mapBounds.width, height: mapBounds.height)
-            .scaleEffect(mapScale())
-            .offset(mapOffset())
+        ZStack {
+            SVGView.map
+            MapPin(mode: .constant(store.pinMode))
+                .scaleEffect(1 / mapScale()) // pin scales together with the map, so we need to counter it to preserve the original size
+                .offset(store.pinOffset)
+                .opacity(store.shouldShowPin ? 1 : 0)
         }
+        .frame(width: mapBounds.width, height: mapBounds.height)
+        .scaleEffect(mapScale())
+        .offset(mapOffset())
     }
 
     private func mapOffset() -> CGSize {

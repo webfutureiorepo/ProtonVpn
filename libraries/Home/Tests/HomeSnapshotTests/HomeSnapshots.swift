@@ -58,6 +58,7 @@ struct SwiftTestingTests {
     @Shared(.recents) var recents
     @Shared(.netShieldLevel) var netShieldLevel
 
+    @available(iOS 17, *)
     @Test("Home screen", arguments: [Int.freeTier, Int.paidTier], homeTestData)
     @MainActor
     func homeScreen(tier: Int, state: (protection: ProtectionState, connection: VPNConnectionStatus)) async throws {

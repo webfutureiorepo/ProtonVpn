@@ -29,6 +29,7 @@ import NEHelper
 import VPNAppCore
 import LegacyCommon
 
+@available(iOS 17, *)
 enum HomeFeatureCreator {
     static func loadInitialState() -> HomeFeature.State {
         do {

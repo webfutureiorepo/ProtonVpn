@@ -22,6 +22,7 @@ import ComposableArchitecture
 import UIKit
 
 @Reducer
+@available(iOS 17.0, *)
 public struct WhatsNewCheckerFeature {
     @ObservableState
     public struct State: Equatable {
@@ -74,6 +75,7 @@ public struct WhatsNewCheckerFeature {
 }
 
 @Reducer
+@available(iOS 17.0, *)
 public struct WhatsNewPresenterFeature {
     @ObservableState
     public struct State: Equatable {

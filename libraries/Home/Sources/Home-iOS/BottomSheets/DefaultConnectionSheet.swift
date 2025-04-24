@@ -26,29 +26,19 @@ import Theme
 import ConnectionInventory
 import HomeShared
 
-extension View {
-    func padSafeArea() -> some View {
-        guard #available(iOS 17.0, *) else {
-            return self
-        }
-        return self.safeAreaPadding(.vertical)
-    }
-}
-
+@available(iOS 17.0, *)
 struct DefaultConnectionSheet: View {
     private static let sectionHeaderHeight: CGFloat = 52.0
     var store: StoreOf<DefaultConnectionFeature>
 
     var body: some View {
-        WithPerceptionTracking {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 0) {
-                    content
-                }
-                .padSafeArea()
+        ScrollView {
+            VStack(alignment: .leading, spacing: 0) {
+                content
             }
-            .background(Color(.background))
+            .safeAreaPadding(.vertical)
         }
+        .background(Color(.background))
     }
 
     @ViewBuilder private var content: some View {
@@ -107,6 +97,7 @@ struct DefaultConnectionSheet: View {
 
 #if DEBUG
 
+@available(iOS 17, *)
 #Preview {
     ZStack { // Xcode 15: #Preview macro only supports a single View in its body
         @Shared(.recents) var recents: OrderedSet<RecentConnection> = [

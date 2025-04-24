@@ -30,6 +30,7 @@ import VPNAppCore
 import SharedViews
 import ProtonCoreUIFoundations
 
+@available(iOS 17, *)
 struct HomeConnectionCardView: View {
     @Dependency(\.locale) private var locale
 
@@ -266,6 +267,7 @@ fileprivate extension VPNConnectionStatus {
     .preferredColorScheme(.dark)
 }
 
+@available(iOS 17, *)
 fileprivate func cardPair(spec: ConnectionSpec, userTier: Int = 2) -> some View {
     return HStack(spacing: .themeSpacing24) {
         HomeConnectionCardView(store: .disconnectedStore(defaultConnection: spec, userTier: userTier))

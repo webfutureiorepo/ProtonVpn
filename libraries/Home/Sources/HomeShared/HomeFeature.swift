@@ -35,6 +35,7 @@ import VPNAppCore
 import Ergonomics
 import Domain
 
+@available(iOS 17, *)
 @Reducer
 public struct HomeFeature {
     @Dependency(\.serverChangeAuthorizer) private var authorizer

@@ -22,6 +22,7 @@ import ComposableArchitecture
 
 import HomeShared
 
+@available(iOS 17.0, *)
 struct WhatsNewViewContainer: View {
     let store: StoreOf<WhatsNewPresenterFeature>
 
@@ -35,6 +36,7 @@ struct WhatsNewViewContainer: View {
     }
 }
 
+@available(iOS 17.0, *)
 private extension WhatsNew.Item {
     func viewBody(primaryAction: @escaping () -> Void) -> some View {
         switch self {

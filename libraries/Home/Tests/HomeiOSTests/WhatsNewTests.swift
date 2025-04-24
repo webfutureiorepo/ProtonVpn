@@ -25,6 +25,7 @@ import ComposableArchitecture
 
 // MARK: - Definitions
 
+@available(iOS 17.0, *)
 extension WhatsNew.Item {
     static let testingNoRuleItem: Self = Self.init(
         id: "testingNoRuleItem",
@@ -83,8 +84,10 @@ extension WhatsNew.Item {
 
 // MARK: - Tests
 
+@available(iOS 17.0, *)
 typealias Evaluator = WhatsNew.Evaluator
 
+@available(iOS 17.0, *)
 @Test
 func evaluatingItemsRules() {
     let noDataBeforeClient = WhatsNewEvaluatorClient {
@@ -120,6 +123,7 @@ func evaluatingItemsRules() {
     }
 }
 
+@available(iOS 17.0, *)
 @Test
 func presentationRules() {
     // No Data before

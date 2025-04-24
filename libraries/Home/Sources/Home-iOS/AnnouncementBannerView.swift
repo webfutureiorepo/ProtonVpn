@@ -56,12 +56,10 @@ struct AnnouncementBannerView: View {
     @State private var showBanner = false
 
     var body: some View {
-        WithPerceptionTracking {
-            if case .banner(let model) = store.state {
-                content(model: model)
-            } else {
-                EmptyView()
-            }
+        if case .banner(let model) = store.state {
+            content(model: model)
+        } else {
+            EmptyView()
         }
     }
 

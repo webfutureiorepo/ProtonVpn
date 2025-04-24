@@ -30,12 +30,13 @@ import Theme
 import Dependencies
 import Localization
 
+@available(iOS 17, *)
 @MainActor
 public struct ConnectionStatusView: View {
 
     private static let maxContentWidth: CGFloat = 480
 
-    @Perception.Bindable var store: StoreOf<ConnectionStatusFeature>
+    @SwiftUI.Bindable var store: StoreOf<ConnectionStatusFeature>
 
     private static let headerHeight: CGFloat = 58
     private static let viewHeight: CGFloat = 200

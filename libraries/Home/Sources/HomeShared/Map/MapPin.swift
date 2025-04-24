@@ -19,6 +19,7 @@
 import SwiftUI
 import Theme
 
+@available(iOS 17.0, *)
 public struct MapPin: View {
 
     @Binding var mode: Mode
@@ -60,17 +61,6 @@ public struct MapPin: View {
                                  endRadius: 0))
             .opacity(0.5)
             .frame(width: 96, height: 96)
-            .withPhaseAnimation(reduceMotion: reduceMotion)
-
-    }
-}
-
-extension View {
-    func withPhaseAnimation(reduceMotion: Bool) -> some View {
-        guard #available(iOS 17.0, *) else {
-            return self
-        }
-        return self
             .phaseAnimator(AnimationPhase.allCases) { content, phase in
                 content
                     .scaleEffect(phase.scaleEffect)
@@ -82,6 +72,7 @@ extension View {
     }
 }
 
+@available(iOS 17.0, *)
 public extension MapPin {
     enum Mode: CaseIterable {
         case exitConnected
