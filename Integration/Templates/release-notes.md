@@ -8,7 +8,9 @@ Latest changes in {{ version }}:
 {% endif %}
 {% for category, changes in release.changes -%}
 {%- for change in changes -%}
-{% if change.commitHash|attrs:"Release-Notes" %}
+{% if change.commitHash|attrs:config.trailers.releaseNotes %}
+- {{ change.commitHash|attrs:config.trailers.releaseNotes }}
+{% elif change.commitHash|attrs:"Release-Notes" %}
 - {{ change.commitHash|attrs:"Release-Notes" }}
 {% endif %}
 {%- endfor -%}
