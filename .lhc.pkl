@@ -133,12 +133,6 @@ local mac = (base) {
         testplansDirectory = "apps/macos/TestPlans"
         dmgConfigPath = "Integration/Scripts/dmg_config.py"
 
-        ci = if (read?("env:CI") == "true") new PipelineProperties {
-            userProperties = new Mapping {
-                ["pipelineHosts"] = "ci-vilnius-1,ci-vilnius-6"
-            }
-        } else null
-
         match = new MatchSettings {
             branchName = "macos/vpn-ci"
         }
