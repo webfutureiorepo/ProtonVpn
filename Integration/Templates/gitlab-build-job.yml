@@ -46,6 +46,10 @@
           done
           popd
       fi
+    - |
+      ./Integration/Scripts/replace_dotenv.sh -e "$NAMES_DOTENV" \
+          libraries/Foundations/Strings/Sources/Strings/Strings.swift \
+          libraries/Foundations/Strings/Sources/Strings/Resources/en.lproj/*
 {{ block.super }}
 {% endblock %}
 
