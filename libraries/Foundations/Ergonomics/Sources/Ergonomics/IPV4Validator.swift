@@ -1,5 +1,5 @@
 //
-//  Created on 2025-04-07 by Pawel Jurczyk.
+//  Created on 2025-05-19 by Pawel Jurczyk.
 //
 //  Copyright (c) 2025 Proton AG
 //
@@ -16,23 +16,23 @@
 //  You should have received a copy of the GNU General Public License
 //  along with Proton VPN.  If not, see <https://www.gnu.org/licenses/>.
 
-import SwiftUI
-import AppKit
-import Theme
-import ComposableArchitecture
+import Foundation
+private import Network
 
-public extension NSViewController {
-    static func plutonium() -> NSViewController {
-        let state = PlutoniumFeature.State()
-        let store = StoreOf<PlutoniumFeature>(initialState: state) {
-            PlutoniumFeature()
+public enum IPV4Validator {
+
+    case valid
+    case invalid
+
+    public init(location: String) {
+        if Self.isValidIPv4(location) {
+            self = .valid
+        } else {
+            self = .invalid
         }
-        let view = PlutoniumView(store: store)
-            .frame(Theme.Constants.settingsViewSize)
+    }
 
-        let controller = NSHostingController(rootView: view)
-        controller.preferredContentSize = Theme.Constants.settingsViewSize
-        controller.sizingOptions = .preferredContentSize
-        return controller
+    private static func isValidIPv4(_ location: String) -> Bool {
+        location.components(separatedBy: ".").count == 4 && IPv4Address(location) != nil
     }
 }
