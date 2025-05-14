@@ -224,6 +224,11 @@
     },
 {% endblock %}
 
+{% block deliver_args %}
+        submit_for_review: true
+{{ block.super }}
+{% endblock %}
+
 {% block sparkle %}
     if $options[:configuration] == "Release"
 {% if channel == "alpha" %}
