@@ -44,7 +44,7 @@ local base = new Train {
         productName = "ProtonVPN"
         userProperties = new Mapping {
             ["platformVersion"] = "15.2"
-            ["toolchainVersion"] = "16.2"
+            ["toolchainVersion"] = "16.3"
             ["appConfigurations"] = "Release,Staging"
         }
     }
