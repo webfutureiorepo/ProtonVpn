@@ -83,11 +83,18 @@ include:
 ## ---- Translations
 ##
 .replace_names:
+  variables:
+      SKIP_MACROS_SETUP: true
+      SKIP_MINT_BOOTSTRAP: true
   before_script:
+    - unset LC_ALL
+    - ./Integration/Scripts/pipeline_setup.sh
     - |
       ./Integration/Scripts/replace_dotenv.sh -e "$NAMES_DOTENV" \
           libraries/Foundations/Strings/Sources/Strings/Strings.swift \
-          libraries/Foundations/Strings/Sources/Strings/Resources/en.lproj/*
+          libraries/Foundations/Strings/Sources/Strings/Resources/en.lproj/* \
+          libraries/Foundations/Domain/Sources/Domain/Constants.swift
+
 
 # Jobs come from the generator inside gitlab translations/generator
 # Config for the project itself (i18n config) is inside translations/config-app
@@ -96,8 +103,8 @@ i18n-crowdin-upload:
   variables:
       I18N_SYNC_CROWDIN_PROJECT: 'apple-vpn'
   extends:
-    - .replace_names
     - .i18n-sync-crowdin-shared-apple
+    - .replace_names
 
 i18n-crowdin-download:
   stage: i18n
@@ -110,8 +117,8 @@ i18n-tv-upload:
   variables:
       I18N_SYNC_CROWDIN_PROJECT: 'apple-vpn-tv'
   extends:
-    - .replace_names
     - .i18n-sync-crowdin-shared-apple
+    - .replace_names
 
 i18n-tv-download:
   stage: i18n
