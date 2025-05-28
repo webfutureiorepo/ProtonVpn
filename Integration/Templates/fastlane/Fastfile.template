@@ -225,7 +225,7 @@
 {% endblock %}
 
 {% block deliver_args %}
-        submit_for_review: true
+        submit_for_review: true,
 {{ block.super }}
 {% endblock %}
 
