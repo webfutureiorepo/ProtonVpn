@@ -108,7 +108,7 @@ open class Snapshot: NSObject {
             NSLog("Couldn't detect/set locale...")
         }
 
-        if locale.isEmpty && !deviceLanguage.isEmpty {
+        if locale.isEmpty, !deviceLanguage.isEmpty {
             locale = Locale(identifier: deviceLanguage).identifier
         }
 
