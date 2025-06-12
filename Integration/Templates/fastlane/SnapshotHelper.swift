@@ -61,7 +61,6 @@ open class Snapshot: NSObject {
     }
 
     open class func setupSnapshot(_ app: XCUIApplication, waitForAnimations: Bool = true) {
-
         Snapshot.app = app
         Snapshot.waitForAnimations = waitForAnimations
 
