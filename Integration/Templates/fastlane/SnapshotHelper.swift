@@ -44,9 +44,9 @@ enum SnapshotError: Error, CustomDebugStringConvertible {
     var debugDescription: String {
         switch self {
         case .cannotFindSimulatorHomeDirectory:
-            return "Couldn't find simulator home location. Please, check SIMULATOR_HOST_HOME env variable."
+            "Couldn't find simulator home location. Please, check SIMULATOR_HOST_HOME env variable."
         case .cannotRunOnPhysicalDevice:
-            return "Can't use Snapshot on a physical device."
+            "Can't use Snapshot on a physical device."
         }
     }
 }
@@ -57,7 +57,7 @@ open class Snapshot: NSObject {
     static var waitForAnimations = true
     static var cacheDirectory: URL?
     static var screenshotsDirectory: URL? {
-        return cacheDirectory?.appendingPathComponent("screenshots", isDirectory: true)
+        cacheDirectory?.appendingPathComponent("screenshots", isDirectory: true)
     }
 
     open class func setupSnapshot(_ app: XCUIApplication, waitForAnimations: Bool = true) {
@@ -291,7 +291,7 @@ private extension XCUIElementQuery {
 
 private extension CGFloat {
     func isBetween(_ numberA: CGFloat, and numberB: CGFloat) -> Bool {
-        return numberA...numberB ~= self
+        numberA...numberB ~= self
     }
 }
 
