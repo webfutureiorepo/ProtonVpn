@@ -28,14 +28,14 @@ import Theme
 import VPNAppCore
 
 @Suite("Map")
-struct MapCitiesScreenTests {
+struct DisconnectedCountriesSnapshotsTests {
     @Shared(.userCountry) var userCountry
 
-//    @Test("Map Screen Cities", arguments: Cities.all)
-    @Test("Map Screen Cities", arguments: [("PL", "Warsaw", 52.23, 21.01), ("CH", "Zurich", 47.37, 8.54)])
+//    @Test("Map Screen Countries", arguments: Countries.all)
+    @Test("Map Screen Countries", arguments: ["PL", "CH"])
     @MainActor
-    func cities(city: (code: String, cityName: String, lat: Double, long: Double)) {
-        let countryCode = city.0
+    func countries(countryCode: String) {
+        let countryCode = countryCode.uppercased()
         let store = Store(initialState: HomeMapFeature.State(), reducer: HomeMapFeature.init)
         let size = ViewImageConfig.iPhoneSe.size!
         let mapView = ZStack {
@@ -44,10 +44,10 @@ struct MapCitiesScreenTests {
                 .background(Color(.background))
                 .environment(\.colorScheme, .dark)
             VStack {
-                Text("\(countryCode), \(city.cityName)")
+                Text(countryCode)
                     .foregroundStyle(.white)
                     .font(.hero)
-                    .padding(.top, .themeSpacing64)
+                    .padding(.themeSpacing64)
                 Spacer()
             }
         }
@@ -57,10 +57,9 @@ struct MapCitiesScreenTests {
             $0.date = .constant(Date())
         } operation: {
             $userCountry |=| countryCode
-            let actual: VPNConnectionActual = .mock(country: countryCode, coordinates: .init(latitude: city.lat, longitude: city.long))
-            store.send(.newMapState(.connectedCoordinates(.init(latitude: city.lat, longitude: city.long), countryCode)))
-            store.send(.connectionStateUpdated(.connected(.defaultFastest, actual)))
-            assertSnapshot(of: mapView, as: .image(layout: .sizeThatFits), testName: "\(countryCode), \(city.cityName)")
+            store.send(.newMapState(.disconnected))
+            store.send(.connectionStateUpdated(.disconnected))
+            assertSnapshot(of: mapView, as: .image(layout: .sizeThatFits), testName: countryCode)
             $userCountry |=| nil
             store.send(.newMapState(.disconnected))
         }
@@ -80,7 +79,7 @@ struct MapCitiesScreenTests {
     ) {
         var snapshotDirectory: String?
         if let projectDir = ProcessInfo.processInfo.environment["CI_PROJECT_DIR"] {
-            snapshotDirectory = "\(projectDir)/libraries/Home/Tests/HomeSnapshotTests/__Snapshots__/ConnectedCitySnapshots"
+            snapshotDirectory = "\(projectDir)/libraries/Home/Tests/HomeSnapshotTests/__Snapshots__/DisconnectedCountriesSnapshots"
         }
 
         let failure = try verifySnapshot(
