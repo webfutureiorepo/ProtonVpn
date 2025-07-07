@@ -1,5 +1,5 @@
 //
-//  Created on 22/05/2025 by Shahin Katebi.
+//  Created on 16/06/2025 by Shahin Katebi.
 //
 //  Copyright (c) 2025 Proton AG
 //
@@ -16,9 +16,21 @@
 //  You should have received a copy of the GNU General Public License
 //  along with Proton VPN.  If not, see <https://www.gnu.org/licenses/>.
 
-enum PlutoniumError: Error {
-    case featureDisabled
-    case vpnInterfaceNotFound
-    case xpcConnectionError
-    case unexpectedError
+import Foundation
+
+enum WireguardNetworkInterface {
+    private static let key = "wireguard_interface_name"
+
+    static var interfaceName: String? {
+        get {
+            UserDefaults.standard.string(forKey: key)
+        }
+        set {
+            if let value = newValue {
+                UserDefaults.standard.set(value, forKey: key)
+            } else {
+                UserDefaults.standard.removeObject(forKey: key)
+            }
+        }
+    }
 }
