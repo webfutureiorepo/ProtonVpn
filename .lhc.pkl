@@ -187,7 +187,7 @@ local ios = (base) {
         }
 
         userProperties = (base.build.userProperties) {
-            ["simulatorRuntime"] = "iOS 17.5"
+            ["simulatorRuntime"] = "iOS 18.2"
             ["isSliTestEnabled"] = read?("env:SLI_TEST") ?? ""
             ["appConfigurations"] = if (base.releaseChannel != "production") "Release,Staging" else "Release"
         }
@@ -242,7 +242,7 @@ local tv = (ios) {
 
         userProperties = (base.build.userProperties) {
             ["appConfigurations"] = "Release"
-            ["simulatorRuntime"] = "tvOS 17.5"
+            ["simulatorRuntime"] = "tvOS 18.2"
         }
     }
 }
