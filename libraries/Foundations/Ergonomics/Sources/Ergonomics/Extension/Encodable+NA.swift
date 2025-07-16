@@ -1,5 +1,5 @@
 //
-//  Created on 17/04/2025 by adam.
+//  Created on 2025-07-16 by Pawel Jurczyk.
 //
 //  Copyright (c) 2025 Proton AG
 //
@@ -16,21 +16,29 @@
 //  You should have received a copy of the GNU General Public License
 //  along with Proton VPN.  If not, see <https://www.gnu.org/licenses/>.
 
-import Ergonomics
 import Foundation
 
-public enum HermesResolverLocationValidator {
-    public enum Transport {
-        case doh
-        case tls
-        case classic
+extension SingleValueEncodingContainer {
+    mutating func encodeNA() throws {
+        try encode("n/a")
+    }
+}
+
+@propertyWrapper
+public struct NAEncodable<T>: Encodable where T: Encodable {
+    public var wrappedValue: T?
+
+    public init(wrappedValue: T?) {
+        self.wrappedValue = wrappedValue
     }
 
-    public static func isValidIPv4(_ location: String) -> Transport? {
-        IPv4Validator(location: location) == .valid ? .classic : nil
-    }
-
-    public static func isValidIPv6(_ location: String) -> Transport? {
-        IPv6Validator(location: location) == .valid ? .classic : nil
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        switch wrappedValue {
+        case let .some(value):
+            try container.encode(value)
+        case .none:
+            try container.encodeNA()
+        }
     }
 }
