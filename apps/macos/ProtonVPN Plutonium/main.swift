@@ -1,5 +1,5 @@
 //
-//  Created on 10/04/2025 by Shahin Katebi.
+//  Created on 25/07/2025 by Shahin Katebi.
 //
 //  Copyright (c) 2025 Proton AG
 //
@@ -16,9 +16,11 @@
 //  You should have received a copy of the GNU General Public License
 //  along with Proton VPN.  If not, see <https://www.gnu.org/licenses/>.
 
+import Foundation
 import NetworkExtension
-import PlutoniumExtension
 
-final class TransparentProxyProvider: PlutoniumTransparentProxyProvider {
-    // System extension implementation - inherits all functionality from PlutoniumTransparentProxyProvider
+autoreleasepool {
+    NEProvider.startSystemExtensionMode()
 }
+
+dispatchMain()
