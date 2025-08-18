@@ -1,5 +1,5 @@
 //
-//  Created on 25/07/2025 by Shahin Katebi.
+//  Created on 18/08/2025 by Shahin Katebi.
 //
 //  Copyright (c) 2025 Proton AG
 //
@@ -16,16 +16,12 @@
 //  You should have received a copy of the GNU General Public License
 //  along with Proton VPN.  If not, see <https://www.gnu.org/licenses/>.
 
-import Foundation
-import NetworkExtension
-import PlutoniumExtension
+#ifndef PlutoniumNetworkExtension_Bridging_Header_h
+#define PlutoniumNetworkExtension_Bridging_Header_h
 
-let ipc = IPCPlutoniumService(withExtension: IPCHelper.extensionMachServiceName(from: Bundle.main), logger: { plutoniumIPCLog("\($0)") })
+#include <TargetConditionals.h>
+#if !TARGET_OS_IPHONE && TARGET_OS_OSX
+#include "../ExtensionsIPC/AuditTokenGetter.h"
+#endif
 
-autoreleasepool {
-    setupPlutoniumLogging()
-    NEProvider.startSystemExtensionMode()
-    ipc.startListener()
-}
-
-dispatchMain()
+#endif /* PlutoniumNetworkExtension_Bridging_Header_h */
