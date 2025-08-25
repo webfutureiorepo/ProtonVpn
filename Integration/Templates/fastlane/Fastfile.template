@@ -86,7 +86,6 @@
     # !begin: ProtonVPN targets
     {% if config.build.platform == "iOS" %}
     $app_identifier => "ProtonVPN",
-    "#{$app_identifier}.OpenVPN-Extension" => "OpenVPN Extension",
     "#{$app_identifier}.WireGuardiOS-Extension" => "WireGuardiOS Extension",
     "#{$app_identifier}.widget" => "Quick Connect Widget",
     "#{$app_identifier}.ConnectWidget" => "ConnectWidgetExtension",
@@ -94,7 +93,6 @@
     {% elif config.build.platform == "macOS" %}
     $app_identifier => "ProtonVPN-mac",
     "ch.protonvpn.ProtonVPNStarter" => "ProtonVPNStarter",
-    "#{$app_identifier}.OpenVPN-Extension" => "ProtonVPN OpenVPN",
     "#{$app_identifier}.WireGuard-Extension" => "ProtonVPN WireGuard",
     "#{$app_identifier}.Transparent-Proxy" => "ProtonVPN Plutonium",
     {% elif config.build.platform == "tvOS" %}
