@@ -94,7 +94,7 @@
     $app_identifier => "ProtonVPN-mac",
     "ch.protonvpn.ProtonVPNStarter" => "ProtonVPNStarter",
     "#{$app_identifier}.WireGuard-Extension" => "ProtonVPN WireGuard",
-    "#{$app_identifier}.Transparent-Proxy" => "ProtonVPN split tunneling",
+    "#{$app_identifier}.Transparent-Proxy" => "ProtonVPN Split Tunneling",
     {% elif config.build.platform == "tvOS" %}
     $app_identifier => "ProtonVPN-tvOS",
     "#{$app_identifier}.WireGuard-tvOS" => "WireGuard-tvOS",
