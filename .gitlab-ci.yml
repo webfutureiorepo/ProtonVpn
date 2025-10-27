@@ -24,7 +24,7 @@ variables:
   IMAGES: $IMAGES
 
 default:
-  image: "team-vpn-macos-15.2-xcode-16.2"
+  image: "team-vpn-macos-15.5-xcode-16.4"
 
 # Only start a pipeline if it's for a merge request, if the pipeline has been scheduled, if this is a merge result onto
 # the develop branch, or if this is a tag which begins with a recognized tag prefix like `mac` or `ios`.
@@ -33,8 +33,7 @@ workflow:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event" ||
           $CI_PIPELINE_SOURCE == "schedule" ||
           $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH ||
-          $CI_COMMIT_TAG =~ /mac|ios|tv\/\d+/ ||
-          $CI_COMMIT_BRANCH == "jkb/feat/VPNAPPL-1507-new-ci"
+          $CI_COMMIT_TAG =~ /mac|ios|tv\/\d+/
 include:
   - project: 'translations/generator'
     ref: master

@@ -43,8 +43,8 @@ local base = new Train {
 
         productName = "ProtonVPN"
         userProperties = new Mapping {
-            ["platformVersion"] = "15.2"
-            ["toolchainVersion"] = "16.2"
+            ["platformVersion"] = "15.5"
+            ["toolchainVersion"] = "16.4"
             ["appConfigurations"] = "Release,Staging"
         }
     }
@@ -187,7 +187,7 @@ local ios = (base) {
         }
 
         userProperties = (base.build.userProperties) {
-            ["simulatorRuntime"] = "iOS 17.5"
+            ["simulatorRuntime"] = "iOS 18.2"
             ["isSliTestEnabled"] = read?("env:SLI_TEST") ?? ""
             ["appConfigurations"] = if (base.releaseChannel != "production") "Release,Staging" else "Release"
         }
@@ -242,7 +242,7 @@ local tv = (ios) {
 
         userProperties = (base.build.userProperties) {
             ["appConfigurations"] = "Release"
-            ["simulatorRuntime"] = "tvOS 17.5"
+            ["simulatorRuntime"] = "tvOS 18.2"
         }
     }
 }

@@ -171,10 +171,10 @@
     {% if train == "iOS" %}
     # We don't pass this to run_tests, it's just for finding the .xctestrun file.
     # (Weird things happen if you decide to pass this value to run_tests. I don't recommend it.)
-    $options[:sdk] = "iphonesimulator17"
-    $options[:simulator_device_type] = "iPhone-12"
+    $options[:sdk] = "iphonesimulator18"
+    $options[:simulator_device_type] = "iPhone-16"
     {% else %}
-    $options[:sdk] = "appletvsimulator17"
+    $options[:sdk] = "appletvsimulator18"
     $options[:simulator_device_type] = "Apple-TV-4K-3rd-generation-1080p"
     {% endif %}
 
