@@ -16,13 +16,12 @@
 //  You should have received a copy of the GNU General Public License
 //  along with Proton VPN.  If not, see <https://www.gnu.org/licenses/>.
 
-import OSLog
+import Foundation
+import Logging
 
-extension Logger {
-    private static let subsystem = "ch.protonvpn.mac.Transparent-Proxy"
-
-    static let provider = Logger(subsystem: subsystem, category: "Provider")
-
-    static let tcp = Logger(subsystem: subsystem, category: "TCP")
-    static let udp = Logger(subsystem: subsystem, category: "UDP")
+/// A marker protocol to allow treating TCP and UDP flow handler actors under a common type.
+/// Used to simplify API surfaces (e.g. registration) where dynamic casting is needed.
+/// This is necessary since actors can't inherit from a shared base class.
+protocol FlowHandler {
+    var id: UUID { get }
 }
