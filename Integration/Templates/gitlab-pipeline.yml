@@ -39,33 +39,6 @@ variables:
 default:
   image: "team-vpn-$BUILD_HOST_IDENTIFIER"
 
-{% if config.build.userProperties.isSliTestEnabled != "true" %}
-
-include:
-  - component: gitlab.protontech.ch/proton/devops/cicd-components/kits/devsecops/generic@0.0.10
-    inputs:
-      allowed-to-fail: true
-
-  - component: gitlab.protontech.ch/proton/devops/cicd-components/kubernetes/atlas-deploy/pipenv@0.21.0 {# Deploy jobs amended in test template #}
-    inputs:
-      cleanup-stage: cleanup
-      key: atlas-$CI_COMMIT_REF_SLUG
-      expiration: "2h"
-      cleanup: manual
-      profile: vpn
-
-  - component: gitlab.protontech.ch/proton/devops/cicd-components/kubernetes/atlas-deploy/pipenv@0.21.0
-    inputs:
-      cleanup-stage: cleanup
-      deploy: manual
-      cleanup: manual
-      images: $IMAGES
-      key: custom-env-atlas-$CI_COMMIT_REF_SLUG
-      suffix: ":custom"
-      expiration: "2h"
-      profile: vpn
-{% endif %}
-
 {%- if config.releaseChannel == "production" and config.build.ci.tagName -%}{# Jobs amended in publish template #}
   - project: 'agarroux/publish-github'
     ref: feat/github-app
