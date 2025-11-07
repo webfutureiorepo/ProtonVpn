@@ -87,7 +87,6 @@
     {% if config.build.platform == "iOS" %}
     $app_identifier => "ProtonVPN",
     "#{$app_identifier}.WireGuardiOS-Extension" => "WireGuardiOS Extension",
-    "#{$app_identifier}.widget" => "Quick Connect Widget",
     "#{$app_identifier}.ConnectWidget" => "ConnectWidgetExtension",
     "#{$app_identifier}.Siri-Shortcut-Handler" => "Siri Shortcut Handler",
     {% elif config.build.platform == "macOS" %}
