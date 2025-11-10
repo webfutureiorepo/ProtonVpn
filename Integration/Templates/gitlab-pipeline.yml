@@ -39,6 +39,11 @@ variables:
 default:
   image: "team-vpn-$BUILD_HOST_IDENTIFIER"
 
+include:
+  - component: gitlab.protontech.ch/proton/devops/cicd-components/kits/devsecops/generic@0.0.10
+    inputs:
+      allowed-to-fail: true
+
 {%- if config.releaseChannel == "production" and config.build.ci.tagName -%}{# Jobs amended in publish template #}
   - project: 'agarroux/publish-github'
     ref: feat/github-app
