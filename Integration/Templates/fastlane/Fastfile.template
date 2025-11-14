@@ -1,5 +1,22 @@
 {% extends "Fastfile.base" %}
 
+{% block header %}
+{{ block.super }}
+require "spaceship"
+
+# This is a monkey-patch for Spaceship so that it handles DEVELOPER_ID_APPLICATION_G2 properly in the certificate types
+# filter - the ASC API doesn't accept the value anymore.
+class << ::Spaceship::ConnectAPI::Certificate
+  alias_method :all_orig, :all
+
+  def all(**args)
+    types = args[:filter]&.delete(:certificateType)&.split(",")
+    certs = all_orig(**args)
+    types ? certs.select { |cert| types.include?(cert.certificate_type) } : certs
+  end
+end
+{% endblock %}
+
 ##
 ## ---- Build Options
 ##
