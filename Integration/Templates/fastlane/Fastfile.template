@@ -106,6 +106,7 @@ end
     "#{$app_identifier}.WireGuardiOS-Extension" => "WireGuardiOS Extension",
     "#{$app_identifier}.ConnectWidget" => "ConnectWidgetExtension",
     "#{$app_identifier}.Siri-Shortcut-Handler" => "Siri Shortcut Handler",
+    "#{$app_identifier}.ProTUN-Extension-Mobile" => "ProTUN-Extension-Mobile",
     {% elif config.build.platform == "macOS" %}
     $app_identifier => "ProtonVPN-mac",
     "ch.protonvpn.ProtonVPNStarter" => "ProtonVPNStarter",
