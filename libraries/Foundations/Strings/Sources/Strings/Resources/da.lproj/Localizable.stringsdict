@@ -5,7 +5,7 @@
     <key>welcome_screen_feature_devices</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
-      <string>Do %#@VARIABLE@ naenkrat</string>
+      <string>Op til %#@VARIABLE@ samtidig</string>
       <key>VARIABLE</key>
       <dict>
         <key>NSStringFormatSpecTypeKey</key>
@@ -13,19 +13,15 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>%d naprava</string>
-        <key>two</key>
-        <string>%d devices</string>
-        <key>few</key>
-        <string>%d devices</string>
+        <string>%d enhed</string>
         <key>other</key>
-        <string>%d devices</string>
+        <string>%d enheder</string>
       </dict>
     </dict>
     <key>welcome_screen_feature_servers_countries</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
-      <string>%#@num_servers@ v %#@num_countries@</string>
+      <string>%#@num_servers@ i %#@num_countries@</string>
       <key>num_countries</key>
       <dict>
         <key>NSStringFormatSpecTypeKey</key>
@@ -33,13 +29,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>%d država</string>
-        <key>two</key>
-        <string>%d državi</string>
-        <key>few</key>
-        <string>%d države</string>
+        <string>%d land</string>
         <key>other</key>
-        <string>%d držav</string>
+        <string>%d lande</string>
       </dict>
       <key>num_servers</key>
       <dict>
@@ -48,13 +40,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>%d novi strežnik</string>
-        <key>two</key>
-        <string>%d nova strežnika</string>
-        <key>few</key>
-        <string>%d novi strežniki</string>
+        <string>%d ny server</string>
         <key>other</key>
-        <string>%d novih strežnikov</string>
+        <string>%d+ nye servere</string>
       </dict>
     </dict>
     <key>modals_upsell_all_countries_feature_multipleDevices</key>
@@ -64,93 +52,73 @@
       <key>VARIABLE</key>
       <dict>
         <key>one</key>
-        <string>Zaščitite do %d napravo</string>
-        <key>two</key>
-        <string>Zaščitite do %d napravi</string>
-        <key>few</key>
-        <string>Zaščitite do %d naprave</string>
+        <string>Beskyt op til %d enheder</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>Zaščitite do %d naprav</string>
+        <string>Beskyt op til %d enheder</string>
       </dict>
     </dict>
     <key>modals_upsell_all_countries_title</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
-      <string>Dostop prek %#@num_servers@ v %#@num_countries@</string>
+      <string>Tilgå over %#@num_servers@ i %#@num_countries@</string>
       <key>num_countries</key>
       <dict>
         <key>one</key>
-        <string>%d držav</string>
-        <key>two</key>
-        <string>%d državi</string>
-        <key>few</key>
-        <string>%d države</string>
+        <string>%d lande</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%d držav</string>
+        <string>%d lande</string>
       </dict>
       <key>num_servers</key>
       <dict>
         <key>one</key>
-        <string>%d varen strežnik</string>
-        <key>two</key>
-        <string>%d varna strežnika</string>
-        <key>few</key>
-        <string>%d varni strežniki</string>
+        <string>%d sikker server</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%d varnih strežnikov</string>
+        <string>%d sikre servere</string>
       </dict>
     </dict>
     <key>modals_new_upsell_all_countries_subtitle</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
-      <string>Odklenite %#@num_servers@ v %#@num_countries@ z VPN Plus.</string>
+      <string>Lås op for %#@num_servers@ i %#@num_countries@ med VPN Plus.</string>
       <key>num_countries</key>
       <dict>
         <key>one</key>
-        <string>%d država</string>
-        <key>two</key>
-        <string>%d državi</string>
-        <key>few</key>
-        <string>%d države</string>
+        <string>%d lande</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%d držav</string>
+        <string>%d lande</string>
       </dict>
       <key>num_servers</key>
       <dict>
         <key>one</key>
-        <string>%d+ varen strežnik</string>
-        <key>two</key>
-        <string>%d+ varna strežnika</string>
-        <key>few</key>
-        <string>%d+ varni strežniki</string>
+        <string>%d+ sikre servere</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%d+ varnih strežnikov</string>
+        <string>%d+ sikre servere</string>
       </dict>
     </dict>
     <key>subscription_upgrade_option1</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
-      <string>Več sto strežnikov v %#@num_countries@</string>
+      <string>Hundredvis af servere i %#@num_countries@</string>
       <key>num_countries</key>
       <dict>
         <key>NSStringFormatSpecTypeKey</key>
@@ -158,19 +126,15 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>%d država</string>
-        <key>two</key>
-        <string>%d državi</string>
-        <key>few</key>
-        <string>%d države</string>
+        <string>%d land</string>
         <key>other</key>
-        <string>%d držav</string>
+        <string>%d lande</string>
       </dict>
     </dict>
     <key>subscription_upgrade_option2</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
-      <string>Sočasno se povežite s %#@num_devices@ napravami</string>
+      <string>Forbind op til %#@num_devices@ på samme tid</string>
       <key>num_devices</key>
       <dict>
         <key>NSStringFormatSpecTypeKey</key>
@@ -178,19 +142,15 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>%d naprava</string>
-        <key>two</key>
-        <string>%d napravi</string>
-        <key>few</key>
-        <string>%d naprave</string>
+        <string>%d enhed</string>
         <key>other</key>
-        <string>%d naprav</string>
+        <string>%d enheder</string>
       </dict>
     </dict>
     <key>maximum_device_plan_limit_part_2</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
-      <string> da hkrati povežete do %#@num_devices@.</string>
+      <string> for at få op til %#@num_devices@ forbundet på samme tid.</string>
       <key>num_devices</key>
       <dict>
         <key>NSStringFormatSpecTypeKey</key>
@@ -198,19 +158,15 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>%d naprava</string>
-        <key>two</key>
-        <string>%d napravi</string>
-        <key>few</key>
-        <string>%d naprave</string>
+        <string>%d enhed</string>
         <key>other</key>
-        <string>%d naprav</string>
+        <string>%d enheder</string>
       </dict>
     </dict>
     <key>search_upsell_title</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
-      <string>Dostop do %#@num_countries@</string>
+      <string>Tilgå alle %#@num_countries@</string>
       <key>num_countries</key>
       <dict>
         <key>NSStringFormatSpecTypeKey</key>
@@ -218,13 +174,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>%d država</string>
-        <key>two</key>
-        <string>%d državi</string>
-        <key>few</key>
-        <string>%d države</string>
+        <string>%d land</string>
         <key>other</key>
-        <string>%d držav</string>
+        <string>%d lande</string>
       </dict>
     </dict>
     <key>_vpnauth_too_many_certs_retry_after</key>
@@ -236,15 +188,11 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Dosegli ste največje število sprememb nastavitev. Poskusite znova po vsaj %d minuti.</string>
-        <key>two</key>
-        <string>Dosegli ste največje število sprememb nastavitev. Poskusite znova po vsaj %d minutah.</string>
-        <key>few</key>
-        <string>Dosegli ste največje število sprememb nastavitev. Poskusite znova po vsaj %d minutah.</string>
+        <string>Du har nået det maksimale antal indstillingsændringer. Prøv igen efter mindst %d minut.</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>other</key>
-        <string>Dosegli ste največje število sprememb nastavitev. Poskusite znova po vsaj %d minutah.</string>
+        <string>Du har nået det maksimale antal indstillingsændringer. Prøv igen efter mindst %d minutter.</string>
       </dict>
     </dict>
     <key>_countries_count_plus</key>
@@ -258,13 +206,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>%d+ država</string>
-        <key>two</key>
-        <string>%d+ državi</string>
-        <key>few</key>
-        <string>%d+ države</string>
+        <string>%d+ land</string>
         <key>other</key>
-        <string>%d+ držav</string>
+        <string>%d+ lande</string>
       </dict>
     </dict>
     <key>_countries_count</key>
@@ -278,13 +222,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>%d država</string>
-        <key>two</key>
-        <string>%d državi</string>
-        <key>few</key>
-        <string>%d države</string>
+        <string>%d land</string>
         <key>other</key>
-        <string>%d držav</string>
+        <string>%d lande</string>
       </dict>
     </dict>
     <key>_plans_connections</key>
@@ -298,13 +238,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>%d povezava</string>
-        <key>two</key>
-        <string>%d povezavi</string>
-        <key>few</key>
-        <string>%d povezave</string>
+        <string>%d forbindelse</string>
         <key>other</key>
-        <string>%d povezav</string>
+        <string>%d forbindelser</string>
       </dict>
     </dict>
     <key>_netshield_stats_ads_blocked</key>
@@ -318,17 +254,11 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Oglas
-blokiran</string>
-        <key>two</key>
-        <string>Oglasa
-blokirana</string>
-        <key>few</key>
-        <string>Oglasi
-blokirani</string>
+        <string>Reklame
+blokeret</string>
         <key>other</key>
-        <string>Oglasov
-blokiranih</string>
+        <string>Reklamer
+blokeret</string>
       </dict>
     </dict>
     <key>_netshield_stats_trackers_stopped</key>
@@ -342,17 +272,11 @@ blokiranih</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Sledilnik
-ustavljen</string>
-        <key>two</key>
-        <string>Sledilnika
-ustavljena</string>
-        <key>few</key>
-        <string>Sledilniki
-ustavljeni</string>
+        <string>Tracker
+stoppet</string>
         <key>other</key>
-        <string>Sledilnikov
-ustavljenih</string>
+        <string>Trackere
+stoppet</string>
       </dict>
     </dict>
     <key>_session_length_days</key>
@@ -366,13 +290,9 @@ ustavljenih</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%d dni</string>
+        <string>%d dage</string>
         <key>one</key>
-        <string>%d dan</string>
-        <key>two</key>
-        <string>%d dneva</string>
-        <key>few</key>
-        <string>%d dnevi</string>
+        <string>%d dag</string>
       </dict>
     </dict>
     <key>_session_length_days_and_hours</key>
@@ -386,28 +306,20 @@ ustavljenih</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%d dni</string>
+        <string>%d dage</string>
         <key>one</key>
-        <string>%d dan</string>
-        <key>two</key>
-        <string>%d dneva</string>
-        <key>few</key>
-        <string>%d dnevi</string>
+        <string>%d dag</string>
       </dict>
       <key>HOURS</key>
       <dict>
         <key>one</key>
-        <string>%d h</string>
-        <key>two</key>
-        <string>%d h</string>
-        <key>few</key>
-        <string>%d h</string>
+        <string>%d t</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%d h</string>
+        <string>%d t</string>
       </dict>
     </dict>
     <key>_session_length_hours_and_minutes</key>
@@ -417,32 +329,24 @@ ustavljenih</string>
       <key>MINUTES</key>
       <dict>
         <key>one</key>
-        <string>%d min.</string>
-        <key>two</key>
-        <string>%d min.</string>
-        <key>few</key>
-        <string>%d min.</string>
+        <string>%d min</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%d min.</string>
+        <string>%d min</string>
       </dict>
       <key>HOURS</key>
       <dict>
         <key>one</key>
-        <string>%d h</string>
-        <key>two</key>
-        <string>%d h</string>
-        <key>few</key>
-        <string>%d h</string>
+        <string>%d t</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%d h</string>
+        <string>%d t</string>
       </dict>
     </dict>
     <key>_session_length_hours</key>
@@ -452,17 +356,13 @@ ustavljenih</string>
       <key>HOURS</key>
       <dict>
         <key>one</key>
-        <string>%d h</string>
-        <key>two</key>
-        <string>%d h</string>
-        <key>few</key>
-        <string>%d h</string>
+        <string>%d t</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%d h</string>
+        <string>%d t</string>
       </dict>
     </dict>
     <key>_session_length_minutes_and_seconds</key>
@@ -472,32 +372,24 @@ ustavljenih</string>
       <key>MINUTES</key>
       <dict>
         <key>one</key>
-        <string>%d min.</string>
-        <key>two</key>
-        <string>%d min.</string>
-        <key>few</key>
-        <string>%d min.</string>
+        <string>%d min</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%d min.</string>
+        <string>%d min</string>
       </dict>
       <key>SECONDS</key>
       <dict>
         <key>one</key>
-        <string>%d sek.</string>
-        <key>two</key>
-        <string>%d sek.</string>
-        <key>few</key>
-        <string>%d sek.</string>
+        <string>%d sek</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%d sek.</string>
+        <string>%d sek</string>
       </dict>
     </dict>
     <key>_session_length_minutes</key>
@@ -507,17 +399,13 @@ ustavljenih</string>
       <key>MINUTES</key>
       <dict>
         <key>one</key>
-        <string>%d min.</string>
-        <key>two</key>
-        <string>%d min.</string>
-        <key>few</key>
-        <string>%d min.</string>
+        <string>%d min</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%d min.</string>
+        <string>%d min</string>
       </dict>
     </dict>
     <key>_session_length_seconds</key>
@@ -527,17 +415,13 @@ ustavljenih</string>
       <key>SECONDS</key>
       <dict>
         <key>one</key>
-        <string>%d sek.</string>
-        <key>two</key>
-        <string>%d sek.</string>
-        <key>few</key>
-        <string>%d sek.</string>
+        <string>%d sek</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%d sek.</string>
+        <string>%d sek</string>
       </dict>
     </dict>
     <key>_step_of</key>
@@ -547,32 +431,24 @@ ustavljenih</string>
       <key>STEPS</key>
       <dict>
         <key>one</key>
-        <string>od %d</string>
-        <key>two</key>
-        <string>od %d</string>
-        <key>few</key>
-        <string>od %d</string>
+        <string>af %d</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>od %d</string>
+        <string>af %d</string>
       </dict>
       <key>STEP</key>
       <dict>
         <key>one</key>
-        <string>Korak %d</string>
-        <key>two</key>
-        <string>Koraka %d</string>
-        <key>few</key>
-        <string>Koraki %d</string>
+        <string>Trin %d</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>Koraki %d</string>
+        <string>Trin %d</string>
       </dict>
     </dict>
     <key>free_connections_modal_subtitle</key>
@@ -582,17 +458,13 @@ ustavljenih</string>
       <key>VARIABLE</key>
       <dict>
         <key>one</key>
-        <string>Lokacije brezplačnega strežnika (%d)</string>
-        <key>two</key>
-        <string>Lokacije brezplačnih strežnikov (%d)</string>
-        <key>few</key>
-        <string>Lokacije brezplačnih strežnikov (%d)</string>
+        <string>Gratis serverlokationer (%d)</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>Lokacije brezplačnih strežnikov (%d)</string>
+        <string>Gratis serverlokationer (%d)</string>
       </dict>
     </dict>
     <key>plan_duration_month</key>
@@ -606,19 +478,15 @@ ustavljenih</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>%d mesec</string>
-        <key>two</key>
-        <string>%d meseca</string>
-        <key>few</key>
-        <string>%d meseci</string>
+        <string>%d måned</string>
         <key>other</key>
-        <string>%d mesecev</string>
+        <string>%d måneder</string>
       </dict>
     </dict>
     <key>upsell_countries_connect_to</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
-      <string>Povežite se z %#@num_countries@</string>
+      <string>Forbind til %#@num_countries@</string>
       <key>num_countries</key>
       <dict>
         <key>NSStringFormatValueTypeKey</key>
@@ -626,13 +494,9 @@ ustavljenih</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>other</key>
-        <string>%d držav</string>
+        <string>%d lande</string>
         <key>one</key>
-        <string>%d država</string>
-        <key>two</key>
-        <string>%d državi</string>
-        <key>few</key>
-        <string>%d držav</string>
+        <string>%d land</string>
       </dict>
     </dict>
     <key>plan_duration_year</key>
@@ -646,13 +510,9 @@ ustavljenih</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>%d leto</string>
-        <key>two</key>
-        <string>%d leti</string>
-        <key>few</key>
-        <string>%d leta</string>
+        <string>%d år</string>
         <key>other</key>
-        <string>%d let</string>
+        <string>%d år</string>
       </dict>
     </dict>
     <key>plutonium_others</key>
@@ -666,13 +526,9 @@ ustavljenih</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>+ %d ostal</string>
-        <key>two</key>
-        <string>+ %d ostala</string>
-        <key>few</key>
-        <string>+ %d ostale</string>
+        <string>+ %d anden</string>
         <key>other</key>
-        <string>+ %d ostalih</string>
+        <string>+ %d andre</string>
       </dict>
     </dict>
   </dict>
