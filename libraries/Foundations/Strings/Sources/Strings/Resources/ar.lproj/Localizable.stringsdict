@@ -5,44 +5,68 @@
     <key>welcome_screen_feature_devices</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
-      <string>Op til %#@VARIABLE@ med det samme</string>
+      <string>حتى %#@VARIABLE@ في نفس الوقت</string>
       <key>VARIABLE</key>
       <dict>
+        <key>zero</key>
+        <string>%d أجهزة</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>%d enhed</string>
+        <string>%d جهاز</string>
+        <key>two</key>
+        <string>%d جهازان</string>
+        <key>few</key>
+        <string>%d أجهزة</string>
+        <key>many</key>
+        <string>%d جهازًا</string>
         <key>other</key>
-        <string>%d enheder</string>
+        <string>%d جهاز</string>
       </dict>
     </dict>
     <key>welcome_screen_feature_servers_countries</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
-      <string>%#@num_servers@ i %#@num_countries@</string>
+      <string>%#@num_servers@ في %#@num_countries@</string>
       <key>num_countries</key>
       <dict>
+        <key>zero</key>
+        <string>%d بلدان</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>%d land</string>
+        <string>%d بلد</string>
+        <key>two</key>
+        <string>%d بلدين</string>
+        <key>few</key>
+        <string>%d بلدان</string>
+        <key>many</key>
+        <string>%d بلدًا</string>
         <key>other</key>
-        <string>%d lande</string>
+        <string>%d بلد</string>
       </dict>
       <key>num_servers</key>
       <dict>
+        <key>zero</key>
+        <string>%d+ خوادم جديدة</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>%d ny server</string>
+        <string>%d+ خادم جديد</string>
+        <key>two</key>
+        <string>%d+ خادمان جديدان</string>
+        <key>few</key>
+        <string>%d+ خوادم جديدة</string>
+        <key>many</key>
+        <string>%d+ خادمًا جديدًا</string>
         <key>other</key>
-        <string>%d+ nye servere</string>
+        <string>%d+ خادم جديد</string>
       </dict>
     </dict>
     <key>modals_upsell_all_countries_feature_multipleDevices</key>
@@ -51,132 +75,204 @@
       <string>%#@VARIABLE@</string>
       <key>VARIABLE</key>
       <dict>
+        <key>zero</key>
+        <string>حماية ما يصل إلى %d أجهزة</string>
         <key>one</key>
-        <string>Beskyt op til %d enheder</string>
+        <string>حماية ما يصل إلى %d جهاز</string>
+        <key>two</key>
+        <string>حماية ما يصل إلى %d جهازين</string>
+        <key>few</key>
+        <string>حماية ما يصل إلى %d أجهزة</string>
+        <key>many</key>
+        <string>حماية ما يصل إلى %d جهازًا</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>Beskyt op til %d enheder</string>
+        <string>حماية ما يصل إلى %d جهاز</string>
       </dict>
     </dict>
     <key>modals_upsell_all_countries_title</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
-      <string>Tilgå over %#@num_servers@ i %#@num_countries@</string>
+      <string>الوصول على %#@num_servers@ في %#@num_countries@</string>
       <key>num_countries</key>
       <dict>
+        <key>zero</key>
+        <string>%d بلدان</string>
         <key>one</key>
-        <string>%d land</string>
+        <string>%d بلد</string>
+        <key>two</key>
+        <string>%d بلدين</string>
+        <key>few</key>
+        <string>%d بلدان</string>
+        <key>many</key>
+        <string>%d بلدًا</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%d lande</string>
+        <string>%d بلد</string>
       </dict>
       <key>num_servers</key>
       <dict>
+        <key>zero</key>
+        <string>%d خوادم آمنة</string>
         <key>one</key>
-        <string>%d sikker server</string>
+        <string>%d خادم آمن</string>
+        <key>two</key>
+        <string>%d خادمان آمنان</string>
+        <key>few</key>
+        <string>%d خوادم آمنة</string>
+        <key>many</key>
+        <string>%d خادمًا آمنًا</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%d sikre servere</string>
+        <string>%d خادم آمن</string>
       </dict>
     </dict>
     <key>modals_new_upsell_all_countries_subtitle</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
-      <string>Lås op for %#@num_servers@ i %#@num_countries@ med VPN Plus.</string>
+      <string>افتح %#@num_servers@ في %#@num_countries@ مع اشتراك VPN Plus.</string>
       <key>num_countries</key>
       <dict>
+        <key>zero</key>
+        <string>%d بلدان</string>
         <key>one</key>
-        <string>%d land</string>
+        <string>%d بلد</string>
+        <key>two</key>
+        <string>%d بلدين</string>
+        <key>few</key>
+        <string>%d بلدان</string>
+        <key>many</key>
+        <string>%d بلدًا</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%d lande</string>
+        <string>%d بلد</string>
       </dict>
       <key>num_servers</key>
       <dict>
+        <key>zero</key>
+        <string>%d+ خوادم آمنة</string>
         <key>one</key>
-        <string>%d+ sikre servere</string>
+        <string>%d+ خادم آمن</string>
+        <key>two</key>
+        <string>%d+ خادمان آمنان</string>
+        <key>few</key>
+        <string>%d+ خوادم آمنة</string>
+        <key>many</key>
+        <string>%d+ خادمًا آمنًا</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%d+ sikre servere</string>
+        <string>%d+ خادم آمن</string>
       </dict>
     </dict>
     <key>subscription_upgrade_option1</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
-      <string>Hundredvis af servere i %#@num_countries@</string>
+      <string>مئات الخوادم في %#@num_countries@</string>
       <key>num_countries</key>
       <dict>
+        <key>zero</key>
+        <string>%d بلدان</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>%d land</string>
+        <string>%d بلد</string>
+        <key>two</key>
+        <string>%d بلدين</string>
+        <key>few</key>
+        <string>%d بلدان</string>
+        <key>many</key>
+        <string>%d بلدًا</string>
         <key>other</key>
-        <string>%d lande</string>
+        <string>%d بلد</string>
       </dict>
     </dict>
     <key>subscription_upgrade_option2</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
-      <string>Forbind op til %#@num_devices@ på samme tid</string>
+      <string>توصيل حتى %#@num_devices@ في الوقت نفسه</string>
       <key>num_devices</key>
       <dict>
+        <key>zero</key>
+        <string>%d أجهزة</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>%d enhed</string>
+        <string>%d جهاز</string>
+        <key>two</key>
+        <string>%d جهازان</string>
+        <key>few</key>
+        <string>%d أجهزة</string>
+        <key>many</key>
+        <string>%d جهازًا</string>
         <key>other</key>
-        <string>%d enheder</string>
+        <string>%d جهاز</string>
       </dict>
     </dict>
     <key>maximum_device_plan_limit_part_2</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
-      <string> for at få op til %#@num_devices@ forbundet på samme tid.</string>
+      <string> لتوصيل حتى %#@num_devices@ في الوقت نفسه.</string>
       <key>num_devices</key>
       <dict>
+        <key>zero</key>
+        <string>%d أجهزة</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>%d enhed</string>
+        <string>%d جهاز</string>
+        <key>two</key>
+        <string>%d جهازان</string>
+        <key>few</key>
+        <string>%d أجهزة</string>
+        <key>many</key>
+        <string>%d جهازًا</string>
         <key>other</key>
-        <string>%d enheder</string>
+        <string>%d جهاز</string>
       </dict>
     </dict>
     <key>search_upsell_title</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
-      <string>Tilgå alle %#@num_countries@</string>
+      <string>الوصول إلى خوادم %#@num_countries@ دولة</string>
       <key>num_countries</key>
       <dict>
+        <key>zero</key>
+        <string>%d بلدان</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>%d land</string>
+        <string>%d بلد</string>
+        <key>two</key>
+        <string>%d بلدين</string>
+        <key>few</key>
+        <string>%d بلدان</string>
+        <key>many</key>
+        <string>%d بلدًا</string>
         <key>other</key>
-        <string>%d lande</string>
+        <string>%d بلد</string>
       </dict>
     </dict>
     <key>_vpnauth_too_many_certs_retry_after</key>
@@ -185,14 +281,22 @@
       <string>%#@VARIABLE@</string>
       <key>VARIABLE</key>
       <dict>
+        <key>zero</key>
+        <string>لقد وصلت إلى الحد الأقصى لعدد تغييرات الإعدادات. يُرجى المحاولة مرة أخرى بعد %d دقائق على الأقل.</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Du har nået det maksimale antal indstillingsændringer. Prøv igen efter mindst %d minut.</string>
+        <string>لقد وصلت إلى الحد الأقصى لعدد تغييرات الإعدادات. يُرجى المحاولة مرة أخرى بعد %d دقيقة على الأقل.</string>
+        <key>two</key>
+        <string>لقد وصلت إلى الحد الأقصى لعدد تغييرات الإعدادات. يُرجى المحاولة مرة أخرى بعد %d دقيقتين على الأقل.</string>
+        <key>few</key>
+        <string>لقد وصلت إلى الحد الأقصى لعدد تغييرات الإعدادات. يُرجى المحاولة مرة أخرى بعد %d دقائق على الأقل.</string>
+        <key>many</key>
+        <string>لقد وصلت إلى الحد الأقصى لعدد تغييرات الإعدادات. يُرجى المحاولة مرة أخرى بعد %d دقيقةً على الأقل.</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>other</key>
-        <string>Du har nået det maksimale antal indstillingsændringer. Prøv igen efter mindst %d minutter.</string>
+        <string>لقد وصلت إلى الحد الأقصى لعدد تغييرات الإعدادات. يُرجى المحاولة مرة أخرى بعد %d دقيقة على الأقل.</string>
       </dict>
     </dict>
     <key>_countries_count_plus</key>
@@ -201,14 +305,22 @@
       <string>%#@VARIABLE@</string>
       <key>VARIABLE</key>
       <dict>
+        <key>zero</key>
+        <string>%d+ بلدان</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>%d+ land</string>
+        <string>%d+ بلد</string>
+        <key>two</key>
+        <string>%d+ بلدين</string>
+        <key>few</key>
+        <string>%d+ بلدان</string>
+        <key>many</key>
+        <string>%d+ بلدًا</string>
         <key>other</key>
-        <string>%d+ lande</string>
+        <string>%d+ بلد</string>
       </dict>
     </dict>
     <key>_countries_count</key>
@@ -217,14 +329,22 @@
       <string>%#@VARIABLE@</string>
       <key>VARIABLE</key>
       <dict>
+        <key>zero</key>
+        <string>%d بلدان</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>%d land</string>
+        <string>%d بلد</string>
+        <key>two</key>
+        <string>%d بلدين</string>
+        <key>few</key>
+        <string>%d بلدان</string>
+        <key>many</key>
+        <string>%d بلدًا</string>
         <key>other</key>
-        <string>%d lande</string>
+        <string>%d بلد</string>
       </dict>
     </dict>
     <key>_plans_connections</key>
@@ -233,14 +353,22 @@
       <string>%#@VARIABLE@</string>
       <key>VARIABLE</key>
       <dict>
+        <key>zero</key>
+        <string>%d اتصالات</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>%d forbindelse</string>
+        <string>%d اتصال</string>
+        <key>two</key>
+        <string>%d اتصالان</string>
+        <key>few</key>
+        <string>%d اتصالات</string>
+        <key>many</key>
+        <string>%d اتصالًا</string>
         <key>other</key>
-        <string>%d forbindelser</string>
+        <string>%d اتصال</string>
       </dict>
     </dict>
     <key>_netshield_stats_ads_blocked</key>
@@ -249,16 +377,28 @@
       <string>%#@VARIABLE@</string>
       <key>VARIABLE</key>
       <dict>
+        <key>zero</key>
+        <string>إعلانات
+محظورة</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Reklame
-blokeret</string>
+        <string>إعلان
+محظور</string>
+        <key>two</key>
+        <string>إعلانان
+محظوران</string>
+        <key>few</key>
+        <string>إعلانات
+محظورة</string>
+        <key>many</key>
+        <string>إعلانًا
+محظورًا</string>
         <key>other</key>
-        <string>Reklamer
-blokeret</string>
+        <string>إعلان
+محظور</string>
       </dict>
     </dict>
     <key>_netshield_stats_trackers_stopped</key>
@@ -267,16 +407,28 @@ blokeret</string>
       <string>%#@VARIABLE@</string>
       <key>VARIABLE</key>
       <dict>
+        <key>zero</key>
+        <string>متعقبات
+متوقفة</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Tracker
-stoppet</string>
+        <string>متعقب
+متوقف</string>
+        <key>two</key>
+        <string>متعقبان
+متوقفان</string>
+        <key>few</key>
+        <string>متعقبات
+متوقفة</string>
+        <key>many</key>
+        <string>متعقبًا
+متوقفًا</string>
         <key>other</key>
-        <string>Trackere
-stoppet</string>
+        <string>متعقب
+متوقف</string>
       </dict>
     </dict>
     <key>_session_length_days</key>
@@ -285,14 +437,22 @@ stoppet</string>
       <string>%#@DAYS@</string>
       <key>DAYS</key>
       <dict>
+        <key>zero</key>
+        <string>%d أيام</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%d dage</string>
+        <string>%d يوم</string>
         <key>one</key>
-        <string>%d dag</string>
+        <string>%d يوم</string>
+        <key>two</key>
+        <string>%d يومان</string>
+        <key>few</key>
+        <string>%d أيام</string>
+        <key>many</key>
+        <string>%d يومًا</string>
       </dict>
     </dict>
     <key>_session_length_days_and_hours</key>
@@ -301,25 +461,41 @@ stoppet</string>
       <string>%#@DAYS@ %#@HOURS@</string>
       <key>DAYS</key>
       <dict>
+        <key>zero</key>
+        <string>%d أيام</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%d dage</string>
+        <string>%d يوم</string>
         <key>one</key>
-        <string>%d dag</string>
+        <string>%d يوم</string>
+        <key>two</key>
+        <string>%d يومان</string>
+        <key>few</key>
+        <string>%d أيام</string>
+        <key>many</key>
+        <string>%d يومًا</string>
       </dict>
       <key>HOURS</key>
       <dict>
+        <key>zero</key>
+        <string>%d س</string>
         <key>one</key>
-        <string>%d time</string>
+        <string>%d س</string>
+        <key>two</key>
+        <string>%d س</string>
+        <key>few</key>
+        <string>%d س</string>
+        <key>many</key>
+        <string>%d س</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%d timer</string>
+        <string>%d س</string>
       </dict>
     </dict>
     <key>_session_length_hours_and_minutes</key>
@@ -328,25 +504,41 @@ stoppet</string>
       <string>%#@HOURS@ %#@MINUTES@</string>
       <key>MINUTES</key>
       <dict>
+        <key>zero</key>
+        <string>%d د</string>
         <key>one</key>
-        <string>%d minut</string>
+        <string>%d د</string>
+        <key>two</key>
+        <string>%d د</string>
+        <key>few</key>
+        <string>%d د</string>
+        <key>many</key>
+        <string>%d د</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%d minutter</string>
+        <string>%d د</string>
       </dict>
       <key>HOURS</key>
       <dict>
+        <key>zero</key>
+        <string>%d س</string>
         <key>one</key>
-        <string>%d time</string>
+        <string>%d س</string>
+        <key>two</key>
+        <string>%d س</string>
+        <key>few</key>
+        <string>%d س</string>
+        <key>many</key>
+        <string>%d س</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%d timer</string>
+        <string>%d س</string>
       </dict>
     </dict>
     <key>_session_length_hours</key>
@@ -355,14 +547,22 @@ stoppet</string>
       <string>%#@HOURS@</string>
       <key>HOURS</key>
       <dict>
+        <key>zero</key>
+        <string>%d س</string>
         <key>one</key>
-        <string>%d time</string>
+        <string>%d س</string>
+        <key>two</key>
+        <string>%d س</string>
+        <key>few</key>
+        <string>%d س</string>
+        <key>many</key>
+        <string>%d س</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%d timer</string>
+        <string>%d س</string>
       </dict>
     </dict>
     <key>_session_length_minutes_and_seconds</key>
@@ -371,25 +571,41 @@ stoppet</string>
       <string>%#@MINUTES@ %#@SECONDS@</string>
       <key>MINUTES</key>
       <dict>
+        <key>zero</key>
+        <string>%d د</string>
         <key>one</key>
-        <string>%d minut</string>
+        <string>%d د</string>
+        <key>two</key>
+        <string>%d د</string>
+        <key>few</key>
+        <string>%d د</string>
+        <key>many</key>
+        <string>%d د</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%d minutter</string>
+        <string>%d د</string>
       </dict>
       <key>SECONDS</key>
       <dict>
+        <key>zero</key>
+        <string>%d ث</string>
         <key>one</key>
-        <string>%d sekund</string>
+        <string>%d ث</string>
+        <key>two</key>
+        <string>%d ث</string>
+        <key>few</key>
+        <string>%d ث</string>
+        <key>many</key>
+        <string>%d ث</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%d sekunder</string>
+        <string>%d ث</string>
       </dict>
     </dict>
     <key>_session_length_minutes</key>
@@ -398,14 +614,22 @@ stoppet</string>
       <string>%#@MINUTES@</string>
       <key>MINUTES</key>
       <dict>
+        <key>zero</key>
+        <string>%d د</string>
         <key>one</key>
-        <string>%d minut</string>
+        <string>%d د</string>
+        <key>two</key>
+        <string>%d د</string>
+        <key>few</key>
+        <string>%d د</string>
+        <key>many</key>
+        <string>%d د</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%d minutter</string>
+        <string>%d د</string>
       </dict>
     </dict>
     <key>_session_length_seconds</key>
@@ -414,14 +638,22 @@ stoppet</string>
       <string>%#@SECONDS@</string>
       <key>SECONDS</key>
       <dict>
+        <key>zero</key>
+        <string>%d ث</string>
         <key>one</key>
-        <string>%d sekund</string>
+        <string>%d ث</string>
+        <key>two</key>
+        <string>%d ث</string>
+        <key>few</key>
+        <string>%d ث</string>
+        <key>many</key>
+        <string>%d ث</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%d sekunder</string>
+        <string>%d ث</string>
       </dict>
     </dict>
     <key>_step_of</key>
@@ -430,25 +662,41 @@ stoppet</string>
       <string>%#@STEP@ %#@STEPS@</string>
       <key>STEPS</key>
       <dict>
+        <key>zero</key>
+        <string>من %d</string>
         <key>one</key>
-        <string>af %d</string>
+        <string>من %d</string>
+        <key>two</key>
+        <string>من %d</string>
+        <key>few</key>
+        <string>من %d</string>
+        <key>many</key>
+        <string>من %d</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>af %d</string>
+        <string>من %d</string>
       </dict>
       <key>STEP</key>
       <dict>
+        <key>zero</key>
+        <string>الخطوة %d</string>
         <key>one</key>
-        <string>Trin %d</string>
+        <string>الخطوة %d</string>
+        <key>two</key>
+        <string>الخطوة %d</string>
+        <key>few</key>
+        <string>الخطوة %d</string>
+        <key>many</key>
+        <string>الخطوة %d</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>Trin %d</string>
+        <string>الخطوة %d</string>
       </dict>
     </dict>
     <key>free_connections_modal_subtitle</key>
@@ -457,14 +705,22 @@ stoppet</string>
       <string>%#@VARIABLE@</string>
       <key>VARIABLE</key>
       <dict>
+        <key>zero</key>
+        <string>مواقع الخوادم المجانية (%d)</string>
         <key>one</key>
-        <string>Gratis serverlokationer (%d)</string>
+        <string>مواقع الخوادم المجانية (%d)</string>
+        <key>two</key>
+        <string>مواقع الخوادم المجانية (%d)</string>
+        <key>few</key>
+        <string>مواقع الخوادم المجانية (%d)</string>
+        <key>many</key>
+        <string>مواقع الخوادم المجانية (%d)</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>Gratis serverlokationer (%d)</string>
+        <string>مواقع الخوادم المجانية (%d)</string>
       </dict>
     </dict>
     <key>plan_duration_month</key>
@@ -473,30 +729,46 @@ stoppet</string>
       <string>%#@plan_duration_month@</string>
       <key>plan_duration_month</key>
       <dict>
+        <key>zero</key>
+        <string>%d أشهر</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>%d måned</string>
+        <string>%d شهر</string>
+        <key>two</key>
+        <string>%d شهران</string>
+        <key>few</key>
+        <string>%d أشهر</string>
+        <key>many</key>
+        <string>%d شهرًا</string>
         <key>other</key>
-        <string>%d måneder</string>
+        <string>%d شهر</string>
       </dict>
     </dict>
     <key>upsell_countries_connect_to</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
-      <string>Forbind til %#@num_countries@</string>
+      <string>اتصل بـ%#@num_countries@</string>
       <key>num_countries</key>
       <dict>
+        <key>zero</key>
+        <string>%d بلدان</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>other</key>
-        <string>%d lande</string>
+        <string>%d بلد</string>
         <key>one</key>
-        <string>%d land</string>
+        <string>%d بلد</string>
+        <key>two</key>
+        <string>%d بلدين</string>
+        <key>few</key>
+        <string>%d بلدان</string>
+        <key>many</key>
+        <string>%d بلدًا</string>
       </dict>
     </dict>
     <key>plan_duration_year</key>
@@ -505,14 +777,22 @@ stoppet</string>
       <string>%#@plan_duration_year@</string>
       <key>plan_duration_year</key>
       <dict>
+        <key>zero</key>
+        <string>%d سنوات</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>%d år</string>
+        <string>%d سنة</string>
+        <key>two</key>
+        <string>%d سنتان</string>
+        <key>few</key>
+        <string>%d سنوات</string>
+        <key>many</key>
+        <string>%d سنةً</string>
         <key>other</key>
-        <string>%d år</string>
+        <string>%d سنة</string>
       </dict>
     </dict>
     <key>plutonium_others</key>
@@ -521,14 +801,22 @@ stoppet</string>
       <string>%#@plutonium_others@</string>
       <key>plutonium_others</key>
       <dict>
+        <key>zero</key>
+        <string>+ %d أخرى</string>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>+ %d anden</string>
+        <string>+ %d آخر</string>
+        <key>two</key>
+        <string>+ %d آخران</string>
+        <key>few</key>
+        <string>+ %d أخرى</string>
+        <key>many</key>
+        <string>+ %d أخرى</string>
         <key>other</key>
-        <string>+ %d andre</string>
+        <string>+ %d أخرى</string>
       </dict>
     </dict>
   </dict>
