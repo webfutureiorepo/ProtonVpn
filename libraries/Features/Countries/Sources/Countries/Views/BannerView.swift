@@ -16,21 +16,25 @@
 //  You should have received a copy of the GNU General Public License
 //  along with Proton VPN.  If not, see <https://www.gnu.org/licenses/>.
 
+import Modals
+import Strings
 import SwiftUI
 import Theme
 
 struct BannerView: View {
-    let viewModel: BannerViewModel
+    let bannerType: BannerFeature.BannerType
 
     var body: some View {
-        Button(action: viewModel.action) {
+        Button(action: {
+            print("Banner tapped: \(bannerType)")
+        }) {
             HStack(spacing: .themeSpacing12) {
-                Image(uiImage: viewModel.leftIcon.image)
+                Image(uiImage: bannerType.iconAsset.image)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 48, height: 48)
 
-                Text(viewModel.text)
+                Text(bannerType.text)
                     .themeFont(.caption())
                     .foregroundColor(Color(.text))
                     .multilineTextAlignment(.leading)
@@ -50,24 +54,25 @@ struct BannerView: View {
     }
 }
 
+extension BannerFeature.BannerType {
+    var iconAsset: Modals.ImageAsset {
+        switch self {
+        case .upsell:
+            Modals.Asset.worldwideCoverage
+        }
+    }
+
+    var text: String {
+        switch self {
+        case .upsell:
+            Localizable.freeBannerText
+        }
+    }
+}
+
 #if DEBUG
     #Preview("Upsell Banner") {
-        BannerView(viewModel: BannerViewModel.upsellBanner)
-            .preferredColorScheme(.dark)
-    }
-
-    #Preview("Short Text") {
-        BannerView(viewModel: BannerViewModel.shortText)
-            .preferredColorScheme(.dark)
-    }
-
-    #Preview("Long Text") {
-        BannerView(viewModel: BannerViewModel.longText)
-            .preferredColorScheme(.dark)
-    }
-
-    #Preview("Custom Icon") {
-        BannerView(viewModel: BannerViewModel.customIcon)
+        BannerView(bannerType: .upsell)
             .preferredColorScheme(.dark)
     }
 #endif
