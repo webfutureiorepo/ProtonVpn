@@ -1,0 +1,2 @@
+// Current version of {{ train }}.
+MARKETING_VERSION = {{ short_version }}
