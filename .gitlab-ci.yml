@@ -70,7 +70,7 @@ include:
     MINT_PATH: $CI_PROJECT_DIR/.caches/mint
     MINT_LINK_PATH: $MINT_PATH/bin
     MINT_CACHE_POLICY: pull-push
-  cache:
+  cache: &mint_cache
     - key: mint-xcode-16.2-$CI_COMMIT_REF_SLUG
       fallback_keys:
         - mint-Xcode-16.2-$CI_DEFAULT_BRANCH
@@ -169,6 +169,14 @@ prepare:
     - if: $I18N_SCHEDULES_FILTER == "commit-translations" # Don't run pipelines when syncing from crowdin
       when: never
     - when: always
+  cache:
+  cache:
+    - *mint_cache
+    - key: suggest-reviewer-$CI_COMMIT_REF_SLUG
+      fallback_keys:
+        - suggest-reviewer-$CI_DEFAULT_BRANCH
+      paths:
+        - $CI_PROJECT_DIR/.caches/review
   artifacts:
     expire_in: 5 days
     paths:
