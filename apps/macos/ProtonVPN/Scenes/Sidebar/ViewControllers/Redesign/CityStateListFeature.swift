@@ -24,8 +24,6 @@ import SwiftUI
 
 @Reducer
 struct CityStateListFeature {
-    @Binding var selectedCountryCode: String?
-
     @Reducer
     enum Path {
         case serversList(ServersListFeature)
@@ -34,10 +32,10 @@ struct CityStateListFeature {
     @ObservableState
     struct State {
         var path = StackState<Path.State>()
-        @Presents var alert: AlertState<Action.Alert>?
         let countryCode: String
 
         var sectionTitle: String?
+        var hoveredServerOfferingID: String?
 
         var listState: ListState = .loading
 
@@ -50,23 +48,15 @@ struct CityStateListFeature {
     enum Action {
         case didAppear
         case path(StackAction<Path.State, Path.Action>)
-        case navigateTo(ServerGroupInfo)
-        case serversUnderMaintenance
+        case navigateToCity(ServerGroupInfo)
         case connect(location: ConnectionSpec.Location, trigger: UserInitiatedVPNChange.VPNTrigger?)
-        case disconnect
+        case connectTo(ServerGroupInfo)
         case select(String)
         case loaded(CityStateListType)
-
-        case alert(PresentationAction<Alert>)
-
-        @CasePathable
-        enum Alert {
-            case maintenance
-        }
+        case hoversOver(String?)
     }
 
     @Dependency(\.connectToVPN) var connectToVPN
-    @Dependency(\.disconnectVPN) var disconnectVPN
     @Dependency(\.defaultConnectionStorage) var defaultConnectionStorage
 
     var body: some Reducer<State, Action> {
@@ -77,25 +67,14 @@ struct CityStateListFeature {
                     let listType = CityStateListType(countryCode: code)
                     await send(.loaded(listType))
                 }
-            case let .navigateTo(groupInfo):
+            case let .navigateToCity(groupInfo):
                 switch groupInfo.kind {
                 case let .city(name, code):
                     state.path.append(.serversList(.init(countryCode: code, listType: .city(name))))
-
                 case let .state(name, code):
                     state.path.append(.serversList(.init(countryCode: code, listType: .state(name))))
-
                 default:
                     break
-                }
-                return .none
-            case .serversUnderMaintenance:
-                state.alert = .init {
-                    if case .loaded(.states) = state.listState {
-                        TextState(Localizable.allServersInStateUnderMaintenance)
-                    } else {
-                        TextState(Localizable.allServersInCityUnderMaintenance)
-                    }
                 }
                 return .none
             case let .loaded(type):
@@ -117,15 +96,14 @@ struct CityStateListFeature {
                     }
                 }
                 return .none
-            case .disconnect:
-                return .run { [listState = state.listState] _ in
-                    if case let .loaded(listType) = listState {
-                        try await disconnectVPN(listType.telemetryTrigger)
-                    } else {
-                        try await disconnectVPN(.country)
-                    }
-                } catch: { error, _ in
-                    log.error("Failed to disconnect from VPN from \(#file) with error: \(error)")
+            case let .hoversOver(offeringID):
+                state.hoveredServerOfferingID = offeringID
+                return .none
+            case let .connectTo(groupInfo):
+                if groupInfo.isUnderMaintenance {
+                    return .none
+                } else {
+                    return .send(.connect(location: groupInfo.kind.locationWithOrder(), trigger: .countriesCity))
                 }
             case let .connect(location, trigger):
                 let spec = ConnectionSpec(location: location, features: [])
@@ -137,26 +115,24 @@ struct CityStateListFeature {
                 }
 
                 return .run { _ in
-                    selectedCountryCode = nil // dismiss the feature by nilling out the selected country
                     try await connectToVPN(spec, connectionProtocol, trigger ?? listTrigger)
-                    await MainActor.run {
-                        DependencyContainer.shared.makeConnectionStatusService().presentStatusViewController()
-                    }
                 } catch: { error, _ in
                     log.error("Failed to connect to VPN from \(#file) with error: \(error)")
                 }
-            case let .path(.element(_, action: .serversList(.connect(location)))):
+            case let .path(.element(_, action: .serversList(.connect(server)))):
+                let location: ConnectionSpec.Location = .exact(
+                    .paid,
+                    logicalID: server.logical.id,
+                    number: server.logical.serverNameComponents.sequence,
+                    subregion: server.logical.state ?? server.logical.city, // state or city name
+                    regionCode: state.countryCode
+                )
                 return .send(.connect(location: location, trigger: .server))
-            case .path(.element(_, action: .serversList(.disconnect))):
-                return .send(.disconnect)
             case .path:
-                return .none
-            case .alert:
                 return .none
             }
         }
         .forEach(\.path, action: \.path)
-        .ifLet(\.$alert, action: \.alert)
     }
 }
 
