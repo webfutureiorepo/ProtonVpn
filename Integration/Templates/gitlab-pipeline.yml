@@ -60,11 +60,11 @@ include:
     inputs:
       stage: publish
       product: vpn
-      version: "{{ short_version }}+{% include "timestamp" %}{% if configuration == "Staging" %}.staging{% endif %}"
+      version: "{{ short_version }}+{% include "timestamp" %}{% if configuration == "Debug-Staging" %}.staging{% endif %}"
       platform: macos
-      artifact_list: "ProtonVPN_mac_v{{ short_version }}.dmg {% if configuration != "Staging" %} sparkle.signature {% endif %}"
+      artifact_list: "ProtonVPN_mac_v{{ short_version }}.dmg {% if configuration != "Debug-Staging" %} sparkle.signature {% endif %}"
       artifact_local_directory: "{{ config.build.outputDirectory }}/{{ configuration }}"
-      {% if configuration == "Staging" %}
+      {% if configuration == "Debug-Staging" %}
       job_prefix: staging-
       {% endif %}
 {% endfor %}

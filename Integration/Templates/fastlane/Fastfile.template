@@ -60,11 +60,11 @@ end
     # configs are generated once per train, and we wouldn't want to create more than one pipeline per train to avoid
     # causing too much congestion.
     {% if train == "iOS" %}
-    if $options[:configuration] == "Staging"
+    if $options[:configuration] == "Debug-Staging"
         $app_identifier += ".debug"
     end
     {% endif %}
-    if $options[:configuration] == "Staging" || $options[:configuration] == "Release"
+    if $options[:configuration] == "Debug-Staging" || $options[:configuration] == "Release"
         {% if config.build.platform == "iOS" or config.build.platform == "tvOS" %}
         $options[:export_method] = "app-store"
         $options[:code_sign_identity] = "Apple Distribution"
