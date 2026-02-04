@@ -67,7 +67,7 @@
 %}
 {# Modify each of the Nexus release upload jobs - notice the "for" #}
 {% for configuration in config.build.userProperties.appConfigurations|split:"," %}
-{%- if configuration == "Staging" -%}{# Add prefix to the job #}
+{%- if configuration == "Debug-Staging" -%}{# Add prefix to the job #}
 staging-
 {%- endif -%}
 artifactlift-release-candidate-artifacts:

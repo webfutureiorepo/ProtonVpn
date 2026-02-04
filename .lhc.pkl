@@ -45,7 +45,7 @@ local base = new Train {
         userProperties = new Mapping {
             ["platformVersion"] = "15.5"
             ["toolchainVersion"] = "16.4"
-            ["appConfigurations"] = "Release,Staging"
+            ["appConfigurations"] = "Release,Debug-Staging"
         }
     }
 
@@ -189,7 +189,7 @@ local ios = (base) {
         userProperties = (base.build.userProperties) {
             ["simulatorRuntime"] = "iOS 18.6"
             ["isSliTestEnabled"] = read?("env:SLI_TEST") ?? ""
-            ["appConfigurations"] = if (base.releaseChannel != "production") "Release,Staging" else "Release"
+            ["appConfigurations"] = if (base.releaseChannel != "production") "Release,Debug-Staging" else "Release"
         }
     }
 
