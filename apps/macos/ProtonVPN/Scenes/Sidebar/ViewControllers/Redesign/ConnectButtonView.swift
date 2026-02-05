@@ -20,20 +20,19 @@ import ProtonCoreUIFoundations
 import SwiftUI
 import Theme
 
-struct ConnectButtonView: View {
+struct ExpandButtonView: View {
     let isUnderMaintenance: Bool
-    let shouldConnect: Bool
     var body: some View {
-        ZStack {
+        HStack {
+            Spacer()
             if isUnderMaintenance {
-                IconProvider.wrench.swiftUIImage
-                    .foregroundColor(Color(.icon, .weak))
-                    .frame(.square(40))
+                IconProvider.wrench.swiftUIImage.resizable()
+                    .frame(.square(.themeSpacing20))
+                    .foregroundColor(Color(.icon, .normal))
             } else {
-                let style: AppTheme.Style = shouldConnect ? [.interactive, .weak] : [.interactive]
-                Circle().foregroundStyle(Color(.background, style))
-                    .frame(.square(40))
-                IconProvider.powerOff.swiftUIImage
+                IconProvider.threeDotsVertical.swiftUIImage.resizable()
+                    .foregroundColor(Color(.icon, .hint))
+                    .frame(.square(.themeSpacing20))
             }
         }
     }

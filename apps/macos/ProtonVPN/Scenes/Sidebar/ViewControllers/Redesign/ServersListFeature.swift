@@ -28,8 +28,6 @@ struct ServersListFeature {
         let listType: ListType
         var list: ServersList = .loading
 
-        @Presents var alert: AlertState<Action.Alert>?
-
         enum ServersList: Equatable {
             case loading
             case loaded([ServerInfo])
@@ -49,36 +47,17 @@ struct ServersListFeature {
     }
 
     enum Action {
-        case connect(location: ConnectionSpec.Location)
-        case disconnect
-        case serversUnderMaintenance
+        case connect(serverInfo: ServerInfo)
         case didAppear
         case loaded([ServerInfo])
-
-        case alert(PresentationAction<Alert>)
-
-        @CasePathable
-        enum Alert {
-            case maintenance
-        }
     }
 
     @Dependency(\.connectToVPN) var connectToVPN
-    @Dependency(\.disconnectVPN) var disconnectVPN
     @Dependency(\.defaultConnectionStorage) var defaultConnectionStorage
-
-    static let maintenanceAlert = AlertState<Action.Alert> {
-        TextState(Localizable.serverUnderMaintenance)
-    }
 
     var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
-            case .alert:
-                return .none
-            case .serversUnderMaintenance:
-                state.alert = .init { TextState(Localizable.serverUnderMaintenance) }
-                return .none
             case .didAppear:
                 return .run { [listType = state.listType, code = state.countryCode] send in
                     @Dependency(\.serverRepository) var repository
@@ -99,10 +78,9 @@ struct ServersListFeature {
             case let .loaded(servers):
                 state.list = .loaded(servers)
                 return .none
-            case .disconnect, .connect:
+            case .connect:
                 return .none // handled by parent
             }
         }
-        .ifLet(\.$alert, action: \.alert)
     }
 }
