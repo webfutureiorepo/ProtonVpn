@@ -35,14 +35,6 @@ workflow:
           $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH ||
           $CI_COMMIT_TAG =~ /mac|ios|tv\/\d+/
 include:
-  - project: 'translations/generator'
-    ref: master
-    file: '/jobs/sync-crowdin.gitlab-ci.yml'
-
-  - project: 'translations/generator'
-    ref: master
-    file: '/jobs/commit-locales.gitlab-ci.yml'
-
   # Generate a dynamic pipeline for each build train (platform) we support. This pipeline is based off of the template
   # at Integration/Templates/gitlab-pipeline.yml, and builds, tests, and publishes all necessary artifacts.
   #
@@ -56,6 +48,29 @@ include:
       cmd_prefix: "mint run "
       templates: "$PIPELINE_TEMPLATE pages.docc fastlane slack-message.txt sparkle-item.xml issue-hashes.txt"
       trains: $TRAINS
+
+
+    # Will create 2 jobs to translate the 2 projects and trigger
+    # a weekly MR with translations inside (1 MR for both)
+    # Langauges defined inside the config service
+  - component: $CI_SERVER_FQDN/translations/ci/groups@~latest
+    inputs:
+      stage: i18n
+      projects:
+        - apple-vpn
+        - apple-vpn-tv
+      before_script_sources:
+        - |
+          export SKIP_MACROS_SETUP=true
+          export SKIP_MINT_BOOTSTRAP=true
+
+        - unset LC_ALL
+        - ./Integration/Scripts/pipeline_setup.sh
+        - |
+          ./Integration/Scripts/replace_dotenv.sh -e "$NAMES_DOTENV" \
+              libraries/Foundations/Strings/Sources/Strings/Strings.swift \
+              libraries/Foundations/Strings/Sources/Strings/Resources/en.lproj/* \
+              libraries/Foundations/Domain/Sources/Domain/Constants.swift
 
 ##
 ## ---- Job templates shamefully stolen from Integration/Templates/gitlab-pipeline.yml
@@ -77,53 +92,6 @@ include:
       paths:
         - $MINT_PATH
       policy: $MINT_CACHE_POLICY
-
-##
-## ---- Translations
-##
-.replace_names:
-  variables:
-      SKIP_MACROS_SETUP: true
-      SKIP_MINT_BOOTSTRAP: true
-  before_script:
-    - unset LC_ALL
-    - ./Integration/Scripts/pipeline_setup.sh
-    - |
-      ./Integration/Scripts/replace_dotenv.sh -e "$NAMES_DOTENV" \
-          libraries/Foundations/Strings/Sources/Strings/Strings.swift \
-          libraries/Foundations/Strings/Sources/Strings/Resources/en.lproj/* \
-          libraries/Foundations/Domain/Sources/Domain/Constants.swift
-
-
-# Jobs come from the generator inside gitlab translations/generator
-# Config for the project itself (i18n config) is inside translations/config-app
-i18n-crowdin-upload:
-  stage: i18n
-  variables:
-      I18N_SYNC_CROWDIN_PROJECT: 'apple-vpn'
-  extends:
-    - .i18n-sync-crowdin-shared-apple
-    - .replace_names
-
-i18n-crowdin-download:
-  stage: i18n
-  variables:
-      I18N_COMMIT_CROWDIN_PROJECT: 'apple-vpn'
-  extends: .i18n-commit-locales-shared-apple
-
-i18n-tv-upload:
-  stage: i18n
-  variables:
-      I18N_SYNC_CROWDIN_PROJECT: 'apple-vpn-tv'
-  extends:
-    - .i18n-sync-crowdin-shared-apple
-    - .replace_names
-
-i18n-tv-download:
-  stage: i18n
-  variables:
-      I18N_COMMIT_CROWDIN_PROJECT: 'apple-vpn-tv'
-  extends: .i18n-commit-locales-shared-apple
 
 ##
 ## ---- Linting/pipeline generation
