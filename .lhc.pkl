@@ -136,6 +136,10 @@ local mac = (base) {
         match = new MatchSettings {
             branchName = "macos/vpn-ci"
         }
+
+        userProperties = (base.build.userProperties) {
+            ["sentryAppIdentifier"] = "macos-vpn"
+        }
     }
 
     distribution = new Sparkle {
