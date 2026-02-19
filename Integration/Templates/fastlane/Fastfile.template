@@ -42,6 +42,7 @@ end
     {%- if config.releaseChannel == "beta" -%}
     :sentry_upload => true,
     {% endif -%}
+    :xcargs => "-skipPackagePluginValidation CI_PROJECT_DIR=\"#{ENV.fetch("CI_PROJECT_DIR", $repo_path)}\"",
     # !end: ProtonVPN options
 {% endblock %}
 
@@ -189,10 +190,10 @@ end
     {% if train == "iOS" %}
     # We don't pass this to run_tests, it's just for finding the .xctestrun file.
     # (Weird things happen if you decide to pass this value to run_tests. I don't recommend it.)
-    $options[:sdk] = "iphonesimulator18"
-    $options[:simulator_device_type] = "iPhone-16"
+    $options[:sdk] = "iphonesimulator26"
+    $options[:simulator_device_type] = "iPhone-17"
     {% else %}
-    $options[:sdk] = "appletvsimulator18"
+    $options[:sdk] = "appletvsimulator26"
     $options[:simulator_device_type] = "Apple-TV-4K-3rd-generation-1080p"
     {% endif %}
 
@@ -201,6 +202,18 @@ end
     $options[:destination_arch] = `uname -m`.strip
     {% endif %}
     # !end: ProtonVPN pretest
+{{ block.super }}
+{% endblock %}
+
+{% block test_cleanup %}
+    # !begin: ProtonVPN test_cleanup
+    unless $options[:build_for_testing]
+        output = `cd .. && Integration/Scripts/output_snapshot_artifacts.sh "#{$options[:output_directory]}/App-ProtonVPN-{{ train }}.log" && cd -`
+        puts output
+        puts "Copying snapshot artifacts failed" unless $?.success?
+    end
+    # !end: ProtonVPN test_cleanup
+
 {{ block.super }}
 {% endblock %}
 
