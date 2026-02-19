@@ -15,6 +15,7 @@ class << ::Spaceship::ConnectAPI::Certificate
     types ? certs.select { |cert| types.include?(cert.certificate_type) } : certs
   end
 end
+
 {% endblock %}
 
 ##
@@ -26,9 +27,6 @@ end
     {% if config.distribution.sparkle -%}
     # !begin: ProtonVPN options
     :dmg_output_name => "{{ config.build.productName }}_mac_v{{ short_version }}",
-    :sparkle_download_headers => {
-        "test-s3" => "foobar"
-    },
     :sparkle_signature_path => "artifacts/sparkle.signature",
     {% if config.build.ci.tagName %}
     :sparkle_item_file => "#{ENV.fetch('DESCRIBE_DIR', $repo_path)}/release/sparkle-item.xml",
@@ -39,10 +37,19 @@ end
     {% if config.build.userProperties.simulatorRuntime %}
     :simulator_runtime_filter => "{{ config.build.userProperties.simulatorRuntime }}",
     {% endif %}
-    {%- if config.releaseChannel == "beta" -%}
-    :sentry_upload => true,
-    {% endif -%}
     :xcargs => "-skipPackagePluginValidation CI_PROJECT_DIR=\"#{ENV.fetch("CI_PROJECT_DIR", $repo_path)}\"",
+    :sentry_app_identifier => "{{ config.build.userProperties.sentryAppIdentifier }}",
+    {%- if config.releaseChannel == "alpha" %}
+    :sentry_upload => true,
+    {%- elif config.releaseChannel == "beta" %}
+    :sentry_set_commits => true,
+    :sentry_set_commits_local => true,
+    :sentry_create_deploy => true,
+    {%- elif config.releaseChannel == "production" %}
+    :sentry_create_deploy => true,
+    :sentry_create_release => true,
+    :sentry_finalize_release => true,
+    {% endif %}
     # !end: ProtonVPN options
 {% endblock %}
 
@@ -64,6 +71,7 @@ end
     if $options[:configuration] == "Debug-Staging"
         $app_identifier += ".debug"
     end
+
     {% endif %}
     if $options[:configuration] == "Debug-Staging" || $options[:configuration] == "Release"
         {% if config.build.platform == "iOS" or config.build.platform == "tvOS" %}
@@ -76,6 +84,7 @@ end
     else
         $options[:export_method] = "development"
     end
+
     {%- if config.distribution.sparkle %}
     # Notarize the dmg, which automatically encompasses the app itself.
     dmg_output_path = "#{$options[:output_directory]}/{{ config.build.productName }}_mac_v{{ short_version }}.dmg"
@@ -92,6 +101,25 @@ end
     # Use the job token to properly authenticate with GitLab, if the right variables are defined
     if (match_path = ENV["MATCH_GIT_PATH"]) and (server_host = ENV["CI_SERVER_HOST"]) and (job_token = ENV["MATCH_ACCESS_TOKEN"])
         $secrets[:match_git_url] = "https://oauth2:#{job_token}@#{server_host}/#{match_path}"
+    end
+
+    if server_host and (project_path = ENV["CI_PROJECT_PATH"])
+        release_url = "https://#{server_host}/#{project_path}/-/releases/{{ config.name }}%2F{{ version }}"
+    end
+
+    if $options[:configuration] == "Debug-Staging"
+        $options[:sentry_upload] = false
+        $options[:sentry_create_release] = false
+        $options[:sentry_set_commits] = false
+        $options[:sentry_create_deploy] = false
+    end
+
+    if $options[:sentry_create_release] and release_url
+        $options[:sentry_release_url] = release_url
+    end
+
+    if $options[:sentry_create_deploy] and release_url
+        $options[:sentry_deploy_url] = release_url
     end
     # !end: ProtonVPN initialize
 {% endblock %}
