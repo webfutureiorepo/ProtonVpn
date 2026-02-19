@@ -16,14 +16,25 @@
 //  You should have received a copy of the GNU General Public License
 //  along with Proton VPN.  If not, see <https://www.gnu.org/licenses/>.
 
+import CommonNetworking
+import Dependencies
 import Domain
-import ProtonCoreNetworking
+import Persistence
 
-public extension ServerLocation {
-    convenience init(dic: JSONDictionary) throws {
-        try self.init(
-            lat: dic.doubleOrThrow(key: "Lat"),
-            long: dic.doubleOrThrow(key: "Long")
-        )
+extension ServerWrapper {
+    public var server: ServerModel {
+        @Dependency(\.serverRepository) var serverRepository: ServerRepository
+        if let vpnServer = serverRepository.getFirstServer(
+            filteredBy: [.logicalID(_server.id)],
+            orderedBy: .fastest
+        ) {
+            return ServerModel(server: vpnServer)
+        } else {
+            fatalError()
+        }
+    }
+
+    static func == (lhs: ServerWrapper, rhs: ServerWrapper) -> Bool {
+        lhs.server == rhs.server
     }
 }
