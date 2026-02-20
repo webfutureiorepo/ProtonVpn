@@ -1,5 +1,5 @@
 //
-//  Created on 27/02/2026 by Max Kupetskyi.
+//  Created on 28/01/2026 by Max Kupetskyi.
 //
 //  Copyright (c) 2026 Proton AG
 //
@@ -16,16 +16,24 @@
 //  You should have received a copy of the GNU General Public License
 //  along with Proton VPN.  If not, see <https://www.gnu.org/licenses/>.
 
-import ProtonCoreUIFoundations
+import Strings
+import SwiftUI
+import Theme
 
-public extension Asset {
-    /// The VPN subscription badge from Theme's own asset catalogue, as a `ThemeIcon`.
-    static let vpnSubscriptionBadgeIcon = ThemeIcon(asset: vpnSubscriptionBadge)
+struct NoResultsContentView: View {
+    var body: some View {
+        VStack(spacing: .themeSpacing2) {
+            Text(Localizable.searchNoResultsTitle)
+                .themeFont(.headline)
+                .foregroundColor(Color(.text))
+                .multilineTextAlignment(.center)
 
-    enum Icons {
-        // ProtonCoreUI icons
-        public static let powerOff = ThemeIcon(iconProviderKeyPath: \.powerOff)
-        public static let wrench = ThemeIcon(iconProviderKeyPath: \.wrench)
-        public static let crossBig = ThemeIcon(iconProviderKeyPath: \.crossBig)
+            Text(Localizable.searchNoResultsSubtitle)
+                .themeFont(.body1())
+                .foregroundColor(Color(.text, .weak))
+                .multilineTextAlignment(.center)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+        .background(Color(.background))
     }
 }
