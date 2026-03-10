@@ -43,7 +43,6 @@ end
     :sentry_upload => true,
     {%- elif config.releaseChannel == "beta" %}
     :sentry_set_commits => true,
-    :sentry_set_commits_spec => "{{ release.revspec }}",
     :sentry_set_commits_local => true,
     :sentry_create_deploy => true,
     {%- elif config.releaseChannel == "production" %}
