@@ -30,12 +30,13 @@
     - job: "publish:{{ config.name }}:app"
     {% endif %}
     {% if channel == "alpha" %}
-    {% for configuration in config.build.userProperties.appConfigurations|split:"," %}
+    {% for configuration, destination in config.build.configurations %}
     - job: "build:{{ config.name }}:all"
       parallel:
         matrix:
           - TARGET: app
             CONFIGURATION: {{ configuration }}
+            DESTINATION: {{ destination }}
     {% endfor %}
     {% endif %}
     {% if config.distribution.sparkle %}{# For macOS releases #}

@@ -31,8 +31,6 @@ variables:
   FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT: 300
   # Unique timestamp according to the commit and pipeline ID
   TIMESTAMP: "{% include "timestamp.base" %}"
-  # Exportable configurations available for building the app
-  APP_CONFIGURATIONS: {%+ block app_configurations %}{{ config.build.userProperties.appConfigurations }}{% endblock +%}
   BUILD_HOST_IDENTIFIER: "macos-{{ config.build.userProperties.platformVersion }}-xcode-{{ config.build.userProperties.toolchainVersion }}"
   RELEASE_PAGE_URL: "$CI_PAGES_URL/$CI_COMMIT_REF_SLUG/documentation/protonvpnrelease/"
 

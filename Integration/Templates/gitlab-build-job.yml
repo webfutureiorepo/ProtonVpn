@@ -1,7 +1,5 @@
 {% extends "gitlab-build-job.base.yml" %} {# Default build template #}
 
-{% block build_app_configurations %}{{ config.build.userProperties.appConfigurations }}{% endblock %}
-
 {% block build_header %}
   extends:
     - .job_template
@@ -65,18 +63,20 @@
 {% if config.build.ci.refName == config.userProperties.releaseBranch and config.build.userProperties.isSliTestEnabled != "true"%}
     - when: manual
 {% else %}
-    - if: $TARGET == "app"
+    - if: $TARGET == "app" && (($DESTINATION == "Physical" && $CONFIGURATION != "Debug") || ($DESTINATION == "Simulator" && $CONFIGURATION == "Debug"))
       when: manual
       allow_failure: true
     - if: $TARGET == "tests"
       when: on_success
+    - when: never
 {% endif %}
 {% elif config.build.ci.tagName %}
-    - if: $TARGET == "app"
+    - if: $TARGET == "app" && (($DESTINATION == "Physical" && $CONFIGURATION != "Debug") || ($DESTINATION == "Simulator" && $CONFIGURATION == "Debug"))
       when: on_success
     - if: $TARGET == "tests"
       when: manual
       allow_failure: true
+    - when: never
 {% else %}
 {{ block.super }}
 {% endif %}

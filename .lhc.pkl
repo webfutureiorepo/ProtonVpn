@@ -42,10 +42,10 @@ local base = new Train {
         } else null
 
         productName = "ProtonVPN"
+
         userProperties = new Mapping {
             ["platformVersion"] = "15.6"
             ["toolchainVersion"] = "26.2"
-            ["appConfigurations"] = "Release,Debug-Staging"
         }
     }
 
@@ -137,6 +137,11 @@ local mac = (base) {
             branchName = "macos/vpn-ci"
         }
 
+        configurations = new {
+            ["Release"] = "Physical"
+            ["Debug-Staging"] = "Physical"
+        }
+
         userProperties = (base.build.userProperties) {
             ["sentryAppIdentifier"] = "macos-vpn"
         }
@@ -190,11 +195,16 @@ local ios = (base) {
             branchName = "ios/vpn-ci"
         }
 
+        configurations = new {
+            ["Release"] = "Physical"
+            ["Debug-Staging"] = "Physical"
+            ["Debug"] = "Simulator"
+        }
+
         userProperties = (base.build.userProperties) {
             ["simulatorRuntime"] = "iOS 26.2"
             ["sentryAppIdentifier"] = "ios-vpn"
             ["isSliTestEnabled"] = read?("env:SLI_TEST") ?? ""
-            ["appConfigurations"] = if (base.releaseChannel != "production") "Release,Debug-Staging" else "Release"
         }
     }
 
@@ -245,8 +255,11 @@ local tv = (ios) {
             branchName = "tvos/vpn-ci"
         }
 
+        configurations = new {
+            ["Release"] = "Physical"
+        }
+
         userProperties = (base.build.userProperties) {
-            ["appConfigurations"] = "Release"
             ["simulatorRuntime"] = "tvOS 26.2"
             ["sentryAppIdentifier"] = "appletv-vpn"
         }

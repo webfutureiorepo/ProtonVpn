@@ -32,8 +32,6 @@
 {% endif %}
 {% endblock %}
 
-{% block publish_app_configurations %}{{ config.build.userProperties.appConfigurations }}{% endblock %}
-
 {% block pages_header %}
   extends:
     - .job_template
@@ -56,6 +54,9 @@
       # Publish uses the signature from the alpha build and the publicly-available sparkle feed to generate a new sparkle xml file.
       - {{ config.build.outputDirectory }}/Release/sparkle.xml
       {% endif %}
+{% elif train == "iOS" and channel == "alpha" -%}
+    paths:
+      - {{ config.build.outputDirectory }}/Debug/appetize.webloc
 {% endif %}
 {% endblock %}
 
@@ -66,7 +67,7 @@
        config.build.ci.refName == config.userProperties.releaseBranch
 %}
 {# Modify each of the Nexus release upload jobs - notice the "for" #}
-{% for configuration in config.build.userProperties.appConfigurations|split:"," %}
+{% for configuration, destination in config.build.configurations %}
 {%- if configuration == "Debug-Staging" -%}{# Add prefix to the job #}
 staging-
 {%- endif -%}
@@ -90,6 +91,7 @@ artifactlift-release-candidate-artifacts:
         matrix:
           - TARGET: app
             CONFIGURATION: {{ configuration }}
+            DESTINATION: {{ destination }}
     {% if configuration == "Release" %}
     - job: "publish:{{ config.name }}:app" # Publish job contains sparkle signature.
     {% endif %}

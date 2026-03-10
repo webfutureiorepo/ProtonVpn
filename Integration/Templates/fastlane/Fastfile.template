@@ -59,6 +59,7 @@ end
     # !begin: ProtonVPN secrets
     :atlas_secret => ENV["ATLAS_SECRET"],
     :dynamic_domain => ENV["DYNAMIC_DOMAIN"],
+    :pipeline_token => ENV["PIPELINE_ACCESS_TOKEN"]
     # !end: ProtonVPN secrets
 {% endblock %}
 
@@ -71,6 +72,11 @@ end
     {% if train == "iOS" %}
     if $options[:configuration] == "Debug-Staging"
         $app_identifier += ".debug"
+    elsif $options[:configuration] == "Debug"
+        # Never upload Debug builds to TestFlight - they'll get rejected anyway.
+        $options.delete(:appstore_action)
+
+        $options[:appetize] = true unless $options.key?(:appetize)
     end
 
     {% endif %}
@@ -82,8 +88,22 @@ end
         $options[:export_method] = "developer-id"
         $options[:notarize] = true
         {% endif %}
+    elsif $options[:appetize]
+        $options[:export_method] = "ad-hoc"
     else
         $options[:export_method] = "development"
+    end
+
+    appetize_url_file = rel_to_repo("#{$options[:output_directory]}/Debug/appetize.webloc")
+    if File.exist?(appetize_url_file)
+        appetize_url = `plutil -extract URL raw "#{appetize_url_file}"`.strip
+
+        if $?.success?
+            $options[:appetize_url] = appetize_url
+        else
+            puts appetize_url # should contain an error message
+            $options[:appetize_url] = "https://appetize.io"
+        end
     end
 
     {%- if config.distribution.sparkle %}
@@ -278,12 +298,51 @@ end
                 short: false
             },
         {% endif %}
+        {% if train == "iOS" %}
+            {
+                title: "Appetize",
+                value: "<#{$options[:appetize_url]}|View>",
+                short: false
+            },
+        {% endif %}
         ]
     },
 {% endblock %}
 
+{% block postannounce %}
+    if ((pipeline_token = $secrets[:pipeline_token]) and
+        (appetize_url = $options[:appetize_url]) and
+        (gitlab_project_id = ENV["CI_PROJECT_ID"]) and
+        (api_url = ENV["CI_API_V4_URL"]))
+
+        tag_name = URI.encode_uri_component("{{ config.build.ci.tagName }}")
+        uri = URI("#{api_url}/projects/#{gitlab_project_id}/releases/#{tag_name}/assets/links")
+        req = Net::HTTP::Post.new(uri, {
+            "Content-Type" => "application/json",
+            "Authorization" => "Bearer #{pipeline_token}"
+        })
+
+        body = {
+            "name" => "Appetize",
+            "url" => appetize_url
+        }
+        req.body = body.to_json
+
+        http = Net::HTTP.new(uri.host, uri.port)
+        http.use_ssl = true
+        res = http.request(req)
+
+        code = res.code.to_i
+        if code < 200 or code >= 300
+            puts "Couldn't update GitLab release:\n #{response.body}"
+        else
+            puts "GitLab release updated."
+        end
+    end
+{% endblock %}
+
 {% block deliver_args %}
-        submit_for_review: true,
+            submit_for_review: true,
 {{ block.super }}
 {% endblock %}
 
