@@ -78,7 +78,11 @@
       allow_failure: true
     - when: never
 {% else %}
-{{ block.super }}
+    - if: $TARGET == "tests" && $DESTINATION == "Simulator"
+      when: on_success
+    - if: $TARGET == "app" && (($DESTINATION == "Physical" && $CONFIGURATION != "Debug") || ($DESTINATION == "Simulator" && $CONFIGURATION == "Debug"))
+      when: on_success
+    - when: never
 {% endif %}
 {% endblock %}
 
