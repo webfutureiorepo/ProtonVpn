@@ -53,7 +53,7 @@ include:
     if (config.releaseChannel == "alpha" and config.build.ci.tagName) or
        config.build.ci.refName == config.userProperties.releaseBranch
 -%}{# Include the Nexus release upload jobs #}
-{% for configuration in block.app_configurations|split:"," %}{# Jobs amended in publish template #}
+{% for configuration, _ in config.build.configurations %}{# Jobs amended in publish template #}
   - component: "gitlab.protontech.ch/proton/devops/cicd-components/tools/artifactlift/release-candidate@0.1.20"
     inputs:
       stage: publish
