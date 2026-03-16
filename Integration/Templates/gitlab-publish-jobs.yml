@@ -26,6 +26,7 @@
         matrix:
           - TARGET: app
             CONFIGURATION: Release # We need the binary so that we can generate a signature
+            DESTINATION: Physical # This was built for a physical device, not a simulator
 {% else %}
     - job: "artifactlift-release-artifacts"
 {% endif %}
